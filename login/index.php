@@ -1,5 +1,5 @@
 <?php
-	session_name("snte#&%1");
+	session_name("snte_app");
 	@session_start();
 
   if(isset($_SESSION['filiacion']) and strlen($_SESSION['filiacion'])>0){
@@ -47,7 +47,7 @@
 
    <div class="container" style='overflow: hidden;'>
        <div class="card card-container login">
-         <img id="profile-img" src="../img/cajax.jpg" width='250px'/>
+         <img id="profile-img" src="../img/cajax.jpg" width='100px' style=' width: 40%; display: block; margin-left: auto; margin-right: auto'/>
          <p id="profile-name" class="profile-name-card"></p>
          <div id='login'>
            <?php

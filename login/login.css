@@ -22,6 +22,8 @@ body, html {
     -webkit-user-select: none;
     user-select: none;
     cursor: default;
+    background-color: #fde5d3 !important;
+    border-color:#fde5d3 !important;
 }
 
 .card {

@@ -49,9 +49,10 @@ const login = (elemento) => {
         return;
     }
     else{
+        console.log(data.target.response);
         let respon = JSON.parse(data.target.response);
         if (respon.acceso == 1) {
-          location.href = "../";
+          //location.href = "../";
         }
         else {
           cargando_div(false);

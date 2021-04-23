@@ -1,5 +1,5 @@
 <?php
-	session_name("snte#&%1");
+	session_name("snte_app");
 	@session_start();
 
 	if (isset($_REQUEST['function'])){$function=clean_var($_REQUEST['function']);}	else{ $function="";}
@@ -9,7 +9,6 @@
 	ini_set('display_errors', '1');
 	date_default_timezone_set("America/Mexico_City");
 
-	//header("Location: /salud/");
 	require_once("init.php");
 
 	use PHPMailer\PHPMailer\PHPMailer;

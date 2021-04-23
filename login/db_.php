@@ -1,5 +1,5 @@
 <?php
-	session_name("salud_publica#&%1");
+	session_name("snte_app");
 	@session_start();
 
 	$function=clean_var($_REQUEST['function']);
@@ -45,9 +45,11 @@
 		}
 		public function acceso(){
 			try{
+
+				$token=clean_var($_REQUEST['token']);
 				$us_fake=clean_var($_REQUEST['userAcceso']);
 				$pa_fake=clean_var($_REQUEST['passAcceso']);
-				$token=clean_var($_REQUEST['token']);
+
 
 				$sql="select idfolio, Filiacion, password, nombre, ape_pat, ape_mat from afiliados where Filiacion='$us_fake' and password='$pa_fake'";
 				$sth = $this::general_($sql);
@@ -75,7 +77,7 @@
 					}
 				}
 				else {
-					$sql="select * from usuarios where NOMBRE=='$us_fake' and CLAVE_ACC='$pa_fake'";
+					$sql="select * from usuarios where NOMBRE='$us_fake' and CLAVE_ACC='$pa_fake'";
 					$sth = $this::general_($sql);
 					if($sth->rowCount()>0){
 

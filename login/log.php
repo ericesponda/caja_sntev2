@@ -8,7 +8,7 @@
     <input type="hidden" id="token"  name="token" class="form-control" placeholder="token" value='<?php echo $token; ?>' required autofocus>
 
     <div class="input-group mb-3">
-      <input type="text" id="userAcceso"  name="userAcceso" class="form-control" placeholder="Usuario" required autofocus>
+      <input type="text" id="userAcceso"  name="userAcceso" class="form-control" placeholder="RFC" required autofocus>
     </div>
 
     <div class="input-group mb-3">
