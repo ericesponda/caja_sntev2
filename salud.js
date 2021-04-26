@@ -10,8 +10,8 @@
 
 	onload = () => {
 		inicial_div(true);
-		fondos();
-		chat_inicia();
+		//fondos();
+		//chat_inicia();
 
 		notifyMe();
 		loadContent(location.hash.slice(1));

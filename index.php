@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="lib/load/dist/css-loader.css">
 	<link rel="stylesheet" href="lib/swal/dist/sweetalert2.min.css">
 	<link rel="stylesheet" href="lib/baguetteBox.js-dev/baguetteBox.css">
-	<link rel="stylesheet" type="text/css" href="librerias15/modulos.css<?php echo "?v=$v"; ?>"/>
+	<link rel="stylesheet" type="text/css" href="lib/modulos.css<?php echo "?v=$v"; ?>"/>
 </head>
 <?php
 	$valor=$_SESSION['idfondo'];
@@ -69,8 +69,8 @@
 	<!--   Core JS Files   -->
 
 	<script src="lib/jquery-3.5.1.js" type="text/javascript"></script>
-	<script src="librerias15/jquery/jquery-ui.js"></script>
-	<link rel="stylesheet" type="text/css" href="librerias15/jquery/jquery-ui.min.css" />
+	<script src="lib/jquery/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="lib/jquery/jquery-ui.min.css" />
 
 	<!--   url   -->
 
@@ -78,30 +78,29 @@
   	<link href="lib/animate.css" rel="stylesheet"/>
 
 	<!-- WYSWYG   -->
-	<link href="librerias15/summernote8.12/summernote-lite.css" rel="stylesheet" type="text/css">
-  	<script src="librerias15/summernote8.12/summernote-lite.js"></script>
-	<script src="librerias15/summernote8.12/lang/summernote-es-ES.js"></script>
+	<link href="lib/summernote8.12/summernote-lite.css" rel="stylesheet" type="text/css">
+  	<script src="lib/summernote8.12/summernote-lite.js"></script>
+	<script src="lib/summernote8.12/lang/summernote-es-ES.js"></script>
 
 	<!--   Alertas   -->
 	<script src="lib/swal/dist/sweetalert2.js"></script>
 
 
 	<!--   para imprimir   -->
-	<script src="librerias15/VentanaCentrada.js" type="text/javascript"></script>
+	<script src="lib/VentanaCentrada.js" type="text/javascript"></script>
 
 	<!--   Cuadros de confirmación y dialogo   -->
-	<link rel="stylesheet" href="librerias15/jqueryconfirm/css/jquery-confirm.css">
-	<script src="librerias15/jqueryconfirm/js/jquery-confirm.js"></script>
+	<link rel="stylesheet" href="lib/jqueryconfirm/css/jquery-confirm.css">
+	<script src="lib/jqueryconfirm/js/jquery-confirm.js"></script>
 
 	<!--   iconos   -->
-	<link rel="stylesheet" href="librerias15/fontawesome-free-5.12.1-web/css/all.css">
+	<link rel="stylesheet" href="lib/fontawesome-free-5.12.1-web/css/all.css">
 
 	<!--   carrusel de imagenes   -->
-
 	<script src="lib/baguetteBox.js-dev/baguetteBox.js" async></script>
 
-	<script src="librerias15/popper.js"></script>
-	<script src="librerias15/tooltip.js"></script>
+	<script src="lib/popper.js"></script>
+	<script src="lib/tooltip.js"></script>
 
 	<!--   Chat   -->
 	<script src="chat/chat.js<?php echo "?v=$v"; ?>" type="text/javascript"></script>
@@ -114,32 +113,15 @@
 	<script src="vainilla.js<?php echo "?v=$v"; ?>"></script>
 
 
-	<script src="librerias15/chartjs/Chart.js"></script>
-	<link href='librerias15/fullcalendar-4.0.1/packages/core/main.css' rel='stylesheet' />
-	<link href='librerias15/fullcalendar-4.0.1/packages/daygrid/main.css' rel='stylesheet' />
-	<script src='librerias15/fullcalendar-4.0.1/packages/core/main.js'></script>
-	<script src='librerias15/fullcalendar-4.0.1/packages/interaction/main.js'></script>
-	<script src='librerias15/fullcalendar-4.0.1/packages/daygrid/main.js'></script>
-
-	<!--   Tablas  -->
-	<script type="text/javascript" src="librerias15/DataTables/datatables.js"></script>
-	<script type="text/javascript" src="librerias15/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
-	<script type="text/javascript" src="librerias15/DataTables/DataTables-1.10.18/js/dataTables.buttons.min.js"></script>
-	<script type="text/javascript" src="librerias15/DataTables/DataTables-1.10.18/js/buttons.flash.min.js"></script>
-	<script type="text/javascript" src="librerias15/DataTables/DataTables-1.10.18/js/jszip.min.js"></script>
-	<script type="text/javascript" src="librerias15/DataTables/DataTables-1.10.18/js/pdfmake.min.js"></script>
-	<script type="text/javascript" src="librerias15/DataTables/DataTables-1.10.18/js/vfs_fonts.js"></script>
-	<script type="text/javascript" src="librerias15/DataTables/DataTables-1.10.18/js/buttons.html5.min.js"></script>
-	<script type="text/javascript" src="librerias15/DataTables/DataTables-1.10.18/js/buttons.print.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="librerias15/DataTables/datatables.min.css"/>
-	<link rel="stylesheet" type="text/css" href="librerias15/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.css"/>
+	<script src="lib/chartjs/Chart.js"></script>
+	<link href='lib/fullcalendar-4.0.1/packages/core/main.css' rel='stylesheet' />
+	<link href='lib/fullcalendar-4.0.1/packages/daygrid/main.css' rel='stylesheet' />
+	<script src='lib/fullcalendar-4.0.1/packages/core/main.js'></script>
+	<script src='lib/fullcalendar-4.0.1/packages/interaction/main.js'></script>
+	<script src='lib/fullcalendar-4.0.1/packages/daygrid/main.js'></script>
 
 	<!--   Boostrap   -->
-	<link rel="stylesheet" href="librerias15/css/bootstrap.min.css">
-	<script src="librerias15/js/bootstrap.js"></script>
-
-	<script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
-
+	<link rel="stylesheet" href="lib/css/bootstrap.min.css">
+	<script src="lib/js/bootstrap.js"></script>
 
 </html>

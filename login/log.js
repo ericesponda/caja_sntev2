@@ -13,6 +13,7 @@ document.addEventListener('submit', function (e) {
       break;
   }
 }, false);
+
 document.addEventListener('click', function (e) {
   if (e.target.attributes.xc) {
     e.preventDefault();
@@ -52,7 +53,7 @@ const login = (elemento) => {
         console.log(data.target.response);
         let respon = JSON.parse(data.target.response);
         if (respon.acceso == 1) {
-          //location.href = "../";
+          location.href = "../";
         }
         else {
           cargando_div(false);
