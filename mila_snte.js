@@ -6,7 +6,6 @@ if (typeof debugx == 'undefined') {
 }
 
 
-
 ///////////////////////////////////////////////NUEVAS OPCIONES
 document.addEventListener('click', function (e) {
     if (e.target.parentNode.attributes.xapp) {

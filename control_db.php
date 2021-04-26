@@ -155,6 +155,14 @@
 					$sth=$this->dbh->query($sql);
 					return $sth->fetchAll(PDO::FETCH_OBJ);
 				}
+
+				if($tipo=="3"){
+					return $sql->fetch(PDO::FETCH_OBJ);
+				}
+				if($tipo=="4"){
+					return $sql->fetchAll(PDO::FETCH_OBJ);
+				}
+
 			}
 			catch(PDOException $e){
 				return "Database access FAILED!".$e->getMessage();
