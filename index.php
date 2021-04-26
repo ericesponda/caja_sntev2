@@ -81,13 +81,13 @@
 					echo "<li>";
 						echo "<a xapp='menu' xdes='afiliado/datos' title='Datos'>";
 							echo "<i class='fas fa-user-shield'></i>";
-							echo "<span class='links_name'>Datos</span>";
-
+							echo "<span class='links_name'>Datos";
 							$fecha_actual = strtotime(date("Y-m-d H:i:s",time()));
 							$fecha_entrada = strtotime(fecha($row->fusuario));
 							if($fecha_actual <= $fecha_entrada){
 									echo "<span class='badge badge-pill badge-warning'><i class='fas fa-pencil-alt'></i></span>";
 							}
+							echo "</span>";
 						echo "</a>";
 						echo "<span class='tooltip'>Datos</span>";
 					echo "</li>";
@@ -97,12 +97,13 @@
 					echo "<li>";
 						echo "<a xapp='menu' xdes='aportacion/aportacion'>";
 						echo "<i class='far fa-money-bill-alt'></i>";
-						echo "<span class='links_name'>Aportación</span>";
+						echo "<span class='links_name'>Aportación";
 						$fecha_actual = strtotime(date("Y-m-d H:i:s",time()));
 						$fecha_entrada = strtotime(fecha($row->faportacion));
 						if($fecha_actual <= $fecha_entrada){
 								echo "<span class='badge badge-pill badge-warning'><i class='fas fa-pencil-alt'></i></span>";
 						}
+						echo "</span>";
 						echo "</a>";
 						echo "<span class='tooltip'>Aportación</span>";
 					echo "</li>";
@@ -111,12 +112,13 @@
 					echo "<li>";
 						echo "<a xapp='menu' xdes='beneficiarios/beneficiarios'>";
 						echo "<i class='fas fa-users'></i>";
-						echo "<span class='links_name'>Beneficiarios</span>";
+						echo "<span class='links_name'>Beneficiarios";
 						$fecha_actual = strtotime(date("Y-m-d H:i:s",time()));
 						$fecha_entrada = strtotime(fecha($row->fbeneficiarios));
 						if($fecha_actual <= $fecha_entrada){
 								echo "<span class='badge badge-pill badge-warning'><i class='fas fa-pencil-alt'></i></span>";
 						}
+						echo "</span>";
 						echo "</a>";
 						echo "<span class='tooltip'>Beneficiarios</span>";
 					echo "</li>";
@@ -196,7 +198,7 @@
     </div>
   </div>
   <div class="home_content">
-    <div class="text">Home Content</div>
+    <div class="text">Caja de Ahorro y Crédito</div>
 		<div class='fijaproceso main' id='contenido'>
 
 		</div>

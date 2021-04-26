@@ -85,7 +85,7 @@ body{
 }
 .sidebar ul li{
   position: relative;
-  height: 50px;
+  height: 40px;
   width: 100%;
   margin: 0 5px;
   list-style: none;
