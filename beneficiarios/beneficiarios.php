@@ -30,7 +30,7 @@
 
     echo "<div class='container' id='div_trabajo'>";
 
-      echo "<form id='form_benef' action='' data-lugar='beneficiarios/db_' data-funcion='guardar_beneficiarios' data-destino='beneficiarios/beneficiarios' data-div='div_trabajo'>";
+      echo "<form id='benef' xform='form' xctrl='beneficiarios/' xopt='guardar_beneficiarios' xdes='beneficiarios/beneficiarios' xdiv='contenido'>";
       echo "<input class='form-control' type='hidden' id='id' NAME='id' value='$idfolio'  >";
       echo "<div class='card mt-3'>";
     		echo "<div class='card-header'>";
@@ -38,7 +38,6 @@
     			echo "Beneficiarios";
     		echo "</div>";
       echo "</div>";
-
 
       echo "<div class='card mt-3'>";
         echo "<div class='card-body'>";
@@ -219,14 +218,14 @@
 	    			}
 					}
 					else{
-						echo "<b>Información pendiente por actualizar/b>";
+						echo "<b>Información pendiente por actualizar</b>";
 					}
         echo "</div>";
       echo "</div>";
     	echo "</form>";
 
 
-      if(is_array($cambio)){
+      if($cambio){
     		echo "<br><div class='card' id='datos_c'>";
     			echo "<div class='card-header'>";
     				echo "<i class='fas fa-exclamation'></i> Datos generales actuales pendientes por actualizar - en breve serán actualizados en las oficinas de caja de ahorro";
@@ -235,77 +234,77 @@
     				echo "<div class='row'>";
               echo "<div class='col-4'>";
                 echo "<label>Beneficiario 1</label>";
-                echo "<input class='form-control' type='text' id='ben1_1' NAME='ben1_1' value='".$cambio['BA']."' ' readonly>";
+                echo "<input class='form-control' type='text' id='ben1_1' NAME='ben1_1' value='".$cambio->BA."' ' readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label >Parentesco 1</label>";
-                echo "<input class='form-control' type='text' id='parentesco1_1' NAME='parentesco1_1' value='".$cambio['PA']."'  readonly>";
+                echo "<input class='form-control' type='text' id='parentesco1_1' NAME='parentesco1_1' value='".$cambio->PA."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Porcentaje 1</label>";
-                echo "<input class='form-control' type='text' id='porcentaje1_1' NAME='porcentaje1_1' value='".$cambio['BFA']."' readonly>";
+                echo "<input class='form-control' type='text' id='porcentaje1_1' NAME='porcentaje1_1' value='".$cambio->BFA."' readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Beneficiario 2</label>";
-                echo "<input class='form-control' type='text' id='ben1_2' NAME='ben1_1' value='".$cambio['BB']."'  readonly>";
+                echo "<input class='form-control' type='text' id='ben1_2' NAME='ben1_1' value='".$cambio->BB."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label >Parentesco 2</label>";
-                echo "<input class='form-control' type='text' id='parentesco1_2' NAME='parentesco1_1' value='".$cambio['PB']."'  readonly>";
+                echo "<input class='form-control' type='text' id='parentesco1_2' NAME='parentesco1_1' value='".$cambio->PB."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Porcentaje 2</label>";
-                echo "<input class='form-control' type='text' id='porcentaje1_2' NAME='porcentaje1_1' value='".$cambio['BFB']."'  readonly>";
+                echo "<input class='form-control' type='text' id='porcentaje1_2' NAME='porcentaje1_1' value='".$cambio->BFB."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Beneficiario 3</label>";
-                echo "<input class='form-control' type='text' id='ben1_2' NAME='ben1_1' value='".$cambio['BC']."'  readonly>";
+                echo "<input class='form-control' type='text' id='ben1_2' NAME='ben1_1' value='".$cambio->BC."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label >Parentesco 3</label>";
-                echo "<input class='form-control' type='text' id='parentesco1_2' NAME='parentesco1_1' value='".$cambio['PC']."'  readonly>";
+                echo "<input class='form-control' type='text' id='parentesco1_2' NAME='parentesco1_1' value='".$cambio->PC."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Porcentaje 3</label>";
-                echo "<input class='form-control' type='text' id='porcentaje1_2' NAME='porcentaje1_1' value='".$cambio['BFC']."'  readonly>";
+                echo "<input class='form-control' type='text' id='porcentaje1_2' NAME='porcentaje1_1' value='".$cambio->BFC."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Beneficiario 4</label>";
-                echo "<input class='form-control' type='text' id='ben1_2' NAME='ben1_1' value='".$cambio['BD']."'  readonly>";
+                echo "<input class='form-control' type='text' id='ben1_2' NAME='ben1_1' value='".$cambio->BD."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label >Parentesco 4</label>";
-                echo "<input class='form-control' type='text' id='parentesco1_2' NAME='parentesco1_1' value='".$cambio['PD']."'  readonly>";
+                echo "<input class='form-control' type='text' id='parentesco1_2' NAME='parentesco1_1' value='".$cambio->PD."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Porcentaje 4</label>";
-                echo "<input class='form-control' type='text' id='porcentaje1_2' NAME='porcentaje1_1' value='".$cambio['BFD']."'  readonly>";
+                echo "<input class='form-control' type='text' id='porcentaje1_2' NAME='porcentaje1_1' value='".$cambio->BFD."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Beneficiario 5</label>";
-                echo "<input class='form-control' type='text' id='ben1_2' NAME='ben1_1' value='".$cambio['BE']."'  readonly>";
+                echo "<input class='form-control' type='text' id='ben1_2' NAME='ben1_1' value='".$cambio->BE."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label >Parentesco 5</label>";
-                echo "<input class='form-control' type='text' id='parentesco1_2' NAME='parentesco1_1' value='".$cambio['PE']."'  readonly>";
+                echo "<input class='form-control' type='text' id='parentesco1_2' NAME='parentesco1_1' value='".$cambio->PE."'  readonly>";
               echo "</div>";
 
               echo "<div class='col-4'>";
                 echo "<label>Porcentaje 5</label>";
-                echo "<input class='form-control' type='text' id='porcentaje1_2' NAME='porcentaje1_1' value='".$cambio['BFE']."'  readonly>";
+                echo "<input class='form-control' type='text' id='porcentaje1_2' NAME='porcentaje1_1' value='".$cambio->BFE."'  readonly>";
               echo "</div>";
 
     				echo "</div>";
@@ -314,7 +313,7 @@
           echo "<div class='card-footer'>";
             echo "<div class='row'>";
               echo "<div class='col-6'>";
-                echo "<button class='btn btn-warning btn-sm' type='button' onclick='cancela_bene()'><i class='fas fa-eraser'></i>Cancelar cambios</button>";
+                echo "<button type='button' class='btn btn-warning btn-sm' xapp='btn' xctrl='beneficiarios/' xopt='cancela_bene' xdes='beneficiarios/beneficiarios' xdiv='contenido' xqa='¿Desea cancelar los cambios solicitados?'><i class='fas fa-eraser'></i>Cancelar cambios</button>";
               echo "</div>";
             echo "</div>";
           echo "</div>";
@@ -323,51 +322,3 @@
     echo "</div>";
   echo "</div>";
 ?>
-
-
-<script type="text/javascript">
-
-  function cancela_bene(){
-    $.confirm({
-      title: 'Cancelar',
-      content: '¿Desea cancelar la actualización de información?',
-      buttons: {
-        Aceptar: function () {
-          $.ajax({
-            data:  {
-              "function":"cancela_bene"
-            },
-            url:  "beneficiarios/db_.php",
-            type:  'post',
-            success:  function (response) {
-							$("#div_trabajo").load("beneficiarios/beneficiarios.php");
-							var datos = JSON.parse(response);
-							if (datos.error==0){
-								$("#datos_c").remove();
-								Swal.fire({
-									type: 'success',
-									title: "Se canceló correctamente",
-									showConfirmButton: false,
-									timer: 1000
-								});
-							}
-							else{
-								Swal.fire({
-									type: 'error',
-									title: "Error favor de verificar",
-									showConfirmButton: false,
-									timer: 2000
-								});
-							}
-            }
-          });
-        },
-        Regresar: function () {
-
-        }
-      }
-    });
-  }
-</script>
-
-

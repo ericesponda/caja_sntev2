@@ -182,7 +182,7 @@ const sagyc = (ele) => {
                 $('#myModal').modal('show');
                 datos.xdiv = "modal_form";
             }
-            $("#" + datos.xdiv).html(data.target.response);
+            document.getElementById(datos.xdiv).innerHTML = data.target.response;
             cargando_div(false);
         });
         xhr.onerror = () => {
@@ -489,8 +489,9 @@ const redirige_div = (formData, datos) => {
                     console.log("\t PRESENTA");
                     //console.log(datares.target.responseText);
                 }
+                document.getElementById(datos.xdiv).innerHTML = datares.target.responseText;
 
-                $("#" + datos.xdiv).html(datares.target.responseText);
+                //$("#" + datos.xdiv).html(datares.target.responseText);
             }
         }
         cargando_div(false);

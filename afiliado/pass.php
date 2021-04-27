@@ -1,15 +1,14 @@
 <?php
-	require_once("db_.php");
+	require_once("index.php");
 	$row=$db->afiliado();
-	$idfolio=$row['idfolio'];
-	$filiacion=$row['Filiacion'];
-	$ape_pat=$row['ape_pat'];
-	$ape_mat=$row['ape_mat'];
-	$nombre=$row['nombre'];
+	$idfolio=$row->idfolio;
+	$filiacion=$row->Filiacion;
+	$ape_pat=$row->ape_pat;
+	$ape_mat=$row->ape_mat;
+	$nombre=$row->nombre;
 ?>
 <div class='container' id='div_trabajo'>
-<form id='form_comision' action='' data-lugar='afiliado/db_' data-funcion='guardar_pass' data-destino='afiliado/pass' data-div='div_trabajo'>
-  <input class="form-control" type="hidden" id="id" name="id" value='<?php echo $idfolio; ?>'>
+<form id='passform' xform='form' xctrl='afiliado/' xopt='guardar_pass' xdes='afiliado/pass' xdiv='contenido'>
   <div class='card'>
     <div class='card-header'>
 			<img src='img/caja.png' width='20' alt='logo'> -
@@ -21,7 +20,7 @@
 				echo "<div class='col-xl-2 col-lg-2 col-md-2 col-sm-3'>";
 					echo "<div class='form-group'>";
 						echo "<label for='idfolio'>Socio</label>";
-						echo "<input class='form-control form-control-sm' type='text' id='idfolio' NAME='idfolio' value='".$row['idfolio']."' placeholder='No. Empleado' readonly>";
+						echo "<input class='form-control form-control-sm' type='text' id='idfolio' NAME='idfolio' value='".$row->idfolio."' placeholder='No. Empleado' readonly>";
 					echo "</div>";
 				echo "</div>";
 
@@ -95,7 +94,7 @@ echo "</form>";
 				echo "<div class='row'>";
 					echo "<div class='col-6'>";
 						echo "<label for='c2'>Contraseña</label>";
-						echo "<input class='form-control form-control-sm' type='text' id='e_civ1' NAME='e_civ1' value='".$cambio['password']."' readonly>";
+						echo "<input class='form-control form-control-sm' type='text' id='e_civ1' NAME='e_civ1' value='".$cambio->password."' readonly>";
 					echo "</div>";
 				echo "</div>";
 			echo "</div>";
@@ -103,7 +102,7 @@ echo "</form>";
 				echo "<div class='card-footer'>";
 					echo "<div class='row'>";
 						echo "<div class='col-6'>";
-							echo "<button class='btn btn-warning btn-sm' type='button' onclick='cancela_pass()'><i class='fas fa-eraser'></i>Cancelar cambios</button>";
+							echo "<button type='button' class='btn btn-warning btn-sm' xapp='btn' xctrl='afiliado/' xopt='cancela_pass' xdes='afiliado/pass' xdiv='contenido' xqa='¿Desea cancelar los cambios solicitados?'><i class='fas fa-eraser'></i>Cancelar cambios</button>";
 						echo "</div>";
 					echo "</div>";
 				echo "</div>";
@@ -111,47 +110,3 @@ echo "</form>";
 	}
  ?>
 </div>
-
-<script type="text/javascript">
-	function cancela_pass(){
-		$.confirm({
-			title: 'Cancelar',
-			content: '¿Desea cancelar la actualización de información?',
-			buttons: {
-				Aceptar: function () {
-					$.ajax({
-	 					data:  {
-							"function":"cancela_pass"
-	 					},
-	 					url:  "afiliado/db_.php",
-	 					type:  'post',
-		 				success:  function (response) {
-							$("#div_trabajo").load("afiliado/pass.php");
-							var datos = JSON.parse(response);
-							if (datos.error==0){
-								$("#datos_c").remove();
-								Swal.fire({
-									type: 'success',
-									title: "Se canceló correctamente",
-									showConfirmButton: false,
-									timer: 1000
-								});
-							}
-							else{
-								Swal.fire({
-									type: 'error',
-									title: "Error favor de verificar",
-									showConfirmButton: false,
-									timer: 2000
-								});
-							}
-		 				}
-	 				});
-				},
-				Regresar: function () {
-
-				}
-			}
-		});
-	}
-</script>

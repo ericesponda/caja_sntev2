@@ -14,10 +14,24 @@
 .form-control{
   border-color: var(--sidebar-bg-color) !important;
 }
+.form-control:focus{
+  color: #212529;
+  background-color: #fff;
+  border-color: var(--sidebar-bg-color) !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
 .card{
   -webkit-box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
   box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+}
+.btn {
+    background-color: #fff !important;
+    border-color:#fde5d3 !important;
+}
+.btn:hover{
+  background-color: #fde5d3 !important;
 }
 
 .grid-container {
@@ -49,7 +63,7 @@
 }
 
 .sidebar {
-  grid-area: sidenav; 
+  grid-area: sidenav;
 }
 
 .main {
@@ -84,7 +98,7 @@ body{
   background: #11101d;
 }
 
-.sidebar{  
+.sidebar{
   height: 100%;
   background: var(--sidebar-bg-color);
   padding: 6px 14px;
@@ -211,7 +225,7 @@ body{
 }
 .sidebar ul li i{
   font-size: 18px;
-  
+
   height: 50px;
   min-width: 50px;
   border-radius: 12px;
@@ -286,7 +300,7 @@ body{
   border-radius: 12px;
   text-align: center;
   transition: all 0.4s ease;
-  background: #1d1b31;
+  background: var(--encabezado-bg-color);
 }
 .grid-container.active .profile #log_out{
   left: 120px;
@@ -306,8 +320,8 @@ body{
 .grid-container.active ~ .home_content{
   z-index: 0;
 }
-.home_content .text{
-  font-size: 25px;
+.text{
+  font-size: 19px;
   font-weight: 500;
   color: #1d1b31;
   margin: 12px;

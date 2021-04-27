@@ -25,9 +25,9 @@
 	$celular=$row->celular;
 
 echo "<div class='container' id='div_trabajo'>";
-	echo "<form id='formafiliado' xform='form' xctrl='afiliado/' xopt='guardar_datos' xdes='afiliado/datos' xdiv='div_trabajo'>";
+	echo "<form id='formafiliado' xform='form' xctrl='afiliado/' xopt='guardar_datos' xdes='afiliado/datos' xdiv='contenido'>";
 	echo "<input class='form-control form-control-sm' type='hidden' id='id' NAME='id' value='$idfolio' readonly>";
- 	
+
 	echo "<div class='card mt-3'>";
 		echo "<div class='card-body'>";
 			echo "<img src='img/caja.png' width='20' alt='logo'> - ";
@@ -37,12 +37,12 @@ echo "<div class='container' id='div_trabajo'>";
 
 	echo "<div class='card mt-3'>";
 		echo "<div class='card-body'>";
-		echo "<div class='row'>";
+			echo "<div class='row'>";
 			echo "<div class='col-xl-2 col-lg-2 col-md-2 col-sm-3 '>";
 				echo "<label for='idfolio'>Socio</label>";
 				echo "<input class='form-control form-control-sm' type='text' id='idfolio' NAME='idfolio' value='".$row->idfolio."' placeholder='No. Empleado' readonly>";
 			echo "</div>";
-	
+
         echo "<div class='col-xl-3 col-lg-4 col-md-4 col-sm-4'>";
           echo "<div class='form-group'>";
             echo "<label for='Filiacion'>Filiación</label>";
@@ -127,7 +127,7 @@ echo "<div class='container' id='div_trabajo'>";
           echo "</div>";
         echo "</div>";
 
-////////////////////////
+				////////////////////////
 				echo "<div class='col-xl-4 col-lg-4 col-md-4 col-sm-4'>";
           echo "<div class='form-group'>";
             echo "<label for='c_c_t'>Clave Centro de Trabajo</label>";
@@ -167,6 +167,7 @@ echo "<div class='container' id='div_trabajo'>";
 				echo "</div>";
       echo "</div>";
     echo "</div>";
+		echo "</div>";
 
 		$row=$db->blo_lista();
 		$fusuario=fecha($row->fusuario);
@@ -174,11 +175,13 @@ echo "<div class='container' id='div_trabajo'>";
 		$fecha_entrada = strtotime($fusuario);
 		$cambio=$db->cambios(3,$idfolio);
 
-		echo "<div class='card-footer'>";
+
+	echo "<div class='card mt-3'>";
+		echo "<div class='card-body'>";
 			if(!$cambio){
 				if($fecha_actual <= $fecha_entrada){
 					echo "<div class='btn-group'>";
-						echo "<button class='btn btn-warning btn-sm' type='submit'><i class='fas fa-sync'></i>Enviar cambios</button>";
+						echo "<button class='btn btn-warning btn-sm' type='submit'><i class='fas fa-sync'></i><br><small>Enviar cambios</small></button>";
 					echo "</div>";
 				}
 				else{

@@ -1,6 +1,15 @@
 <?php
-	require_once("db_.php");
-	$clv_cred = $_REQUEST['clv_cred'];
+	require_once("index.php");
+
+
+
+	if(!isset($_REQUEST['clv_cred']) or strlen($_REQUEST['clv_cred'])==0){
+		echo "Debe seleccionar un crédito";
+		die();
+	}
+
+		$clv_cred = $_REQUEST['clv_cred'];
+
 	$id=$_SESSION['idfolio'];
 
 	$dat_credito=$db->datos_credito($clv_cred);

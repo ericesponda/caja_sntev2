@@ -20,7 +20,7 @@ class Escritorio extends SNTE{
 		parent::__construct();
 	}
 
-	
+
 
 	public function guardar_datos(){			/////////////////////////////////////PARA CAMBIOS DE DATOS
 		$x="";
@@ -152,7 +152,8 @@ class Escritorio extends SNTE{
 	public function guardar_acceso(){			/////////////////////////////////////PARA CAMBIOS DE ACCESO
 		$x="";
 		$arreglo =array();
-		$idfolio=clean_var($_REQUEST['id']);
+
+		$idfolio=clean_var($_SESSION['idfolio']);
 		if(strlen($idfolio)==0){
 			$arr=array();
 			$arr+=array('error'=>1);
@@ -190,7 +191,7 @@ class Escritorio extends SNTE{
 			$arreglo+=array('nombre'=>$row['nombre']);
 			$arreglo+=array('ape_pat'=>$row['ape_pat']);
 			$arreglo+=array('ape_mat'=>$row['ape_mat']);
-			$x=$this->insert('bit_datos', $arreglo);
+			$x=$this->insert_('bit_datos', $arreglo);
 
 			return $x;
 		}
@@ -210,7 +211,7 @@ class Escritorio extends SNTE{
 		$row=$sth->fetch();
 		$contar=$sth->rowCount();
 
-		$x=$this->borrar('bit_datos','id',$row['id']);
+		$x=$this->borrar_('bit_datos','id',$row['id']);
 		if($x){
 			$arr=array();
 			$arr+=array('error'=>0);
@@ -227,7 +228,7 @@ class Escritorio extends SNTE{
 	public function guardar_pass(){				/////////////////////////////////////PARA CAMBIOS DE CONTRASEÑA
 		$x="";
 		$arreglo =array();
-		$idfolio=clean_var($_REQUEST['id']);
+		$idfolio=clean_var($_SESSION['idfolio']);
 		if(strlen($idfolio)==0){
 			$arr=array();
 			$arr+=array('error'=>1);
@@ -254,7 +255,7 @@ class Escritorio extends SNTE{
 			$arreglo+=array('nombre'=>$row['nombre']);
 			$arreglo+=array('ape_pat'=>$row['ape_pat']);
 			$arreglo+=array('ape_mat'=>$row['ape_mat']);
-			$x=$this->insert('bit_datos', $arreglo);
+			$x=$this->insert_('bit_datos', $arreglo);
 			return $x;
 		}
 		else{
@@ -273,7 +274,7 @@ class Escritorio extends SNTE{
 		$row=$sth->fetch();
 		$contar=$sth->rowCount();
 
-		$x=$this->borrar('bit_datos','id',$row['id']);
+		$x=$this->borrar_('bit_datos','id',$row['id']);
 		if($x){
 			$arr=array();
 			$arr+=array('error'=>0);

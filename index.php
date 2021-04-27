@@ -50,7 +50,7 @@
 
 <div class="grid-container">
   <header class="header">
-	<div class="text">Caja de Ahorro y Crédito</div>
+		<div class="text">Caja de Ahorro y Crédito</div>
   </header>
   <aside class="sidebar">
     <div class="logo_content">
@@ -199,16 +199,13 @@
 				</a>
       </div>
     </div>
-  
-
-
   </aside>
   <main class="main"  id='contenido'>
 
 
   </main>
   <footer class="footer">
-	   
+
   </footer>
 </div>
 
@@ -243,7 +240,7 @@
 	<script src="lib/jquery/jquery-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="lib/jquery/jquery-ui.min.css" />
 	-->
-	
+
 	<!--   url   -->
 
 	<!-- Animation library for notifications   -->
