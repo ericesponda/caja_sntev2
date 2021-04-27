@@ -9,6 +9,14 @@
   --fijaproceso-bg-color:#fff;
 }
 
+.form-control{
+  border-color: var(--sidebar-bg-color) !important;
+}
+.card{
+  -webkit-box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+  box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+}
 
 .grid-container {
   display: grid;

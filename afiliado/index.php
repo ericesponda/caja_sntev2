@@ -138,7 +138,7 @@ class Escritorio extends SNTE{
 			$arreglo+=array('nombre'=>$row['nombre']);
 			$arreglo+=array('ape_pat'=>$row['ape_pat']);
 			$arreglo+=array('ape_mat'=>$row['ape_mat']);
-			$x=$this->insert('bit_datos', $arreglo);
+			$x=$this->insert_('bit_datos', $arreglo);
 			return $x;
 		}
 		else{
@@ -156,7 +156,7 @@ class Escritorio extends SNTE{
 		$sth->execute();
 		$row=$sth->fetch();
 
-		$x=$this->borrar('bit_datos','id',$row['id']);
+		$x=$this->borrar_('bit_datos','id',$row['id']);
 		if($x){
 			$arr=array();
 			$arr+=array('error'=>0);
