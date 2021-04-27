@@ -1,21 +1,20 @@
 <?php
-	require_once("db_.php");
+	require_once("index.php");
 
-	$clv_cred = $_REQUEST['id'];
-	$id=$_SESSION['idfolio'];
+		$clv_cred = $_REQUEST['cred'];
+		$id=$_SESSION['idfolio'];
 
 		$row=$db->afiliado();
 
 		$sql="SELECT clv_cred,crx.idfolio,fecha,crx.monto,observa,crx.estado,plazo,if(crx.estado=1,'ACTIVO','INACTIVO') as cred_esta,interes,crx.total,crx.quin_ini,crx.anio_ini,crx.quin_fin,crx.anio_fin,nocheque,aportacion,(select saldo_actual from detallepago where idcredito=crx.clv_cred order by anio desc,quincena desc,iddetalle limit 1) as saldo_actual FROM creditos	crx where crx.clv_cred='$clv_cred'";
-		$dat_credito=$db->general($sql,2);
+		$dat_credito=$db->general_($sql,1);
 
 		$sql="select SUM(monto) as aporta from detallepago where idcredito='$clv_cred' order by anio,quincena,iddetalle";
-		$aportax=$db->general($sql,2);
+		$aportax=$db->general_($sql,1);
 
-		$txt_saldo=$dat_credito['total']-$aportax['aporta'];
+		$txt_saldo=$dat_credito->total-$aportax->aporta;
 
-		set_include_path('../librerias15/pdf2/src/'.PATH_SEPARATOR.get_include_path());
-		include 'Cezpdf.php';
+		include '../vendor/autoload.php';
 
 		$pdf = new Cezpdf('letter','portrait','color',array(255,255,255));
 		$pdf->selectFont('Helvetica');
@@ -65,17 +64,17 @@
 
 
 		$pdf->addText(40,595,10,"PLAZO:",0,'left');
-		$pdf->addText(100,595,10,$dat_credito['plazo'],0,'left');
+		$pdf->addText(100,595,10,$dat_credito->plazo,0,'left');
 		$pdf->line(100,592,190,592);
 
 
 		$pdf->addText(200,595,10,"QUIN. INI:",0,'left');
-		$pdf->addText(250,595,10,$dat_credito['quin_ini']."/".$dat_credito['anio_ini'],0,'left');
+		$pdf->addText(250,595,10,$dat_credito->quin_ini."/".$dat_credito->anio_ini,0,'left');
 		$pdf->line(250,592,380,592);
 
 
 		$pdf->addText(400,595,10,"QUIN. FIN:",0,'left');
-		$pdf->addText(460,595,10,$dat_credito['quin_fin']."/".$dat_credito['anio_fin'],0,'left');
+		$pdf->addText(460,595,10,$dat_credito->quin_fin."/".$dat_credito->anio_fin,0,'left');
 		$pdf->line(460,592,570,592);
 
 		$pdf->setColor(0.9,0.9,0.9);
@@ -91,16 +90,16 @@
 		$pdf->addText(310,110,12,"RESUMEN ESTADO DE CUENTA",0,'center');
 
 		$pdf->addText(400,88,11,"PRESTAMO:",200,'left');
-		$pdf->addText(400,88,11,"".number_format($dat_credito['monto'],2)."",150,'right');
+		$pdf->addText(400,88,11,"".number_format($dat_credito->monto,2)."",150,'right');
 
 		$pdf->addText(400,76,11,"INTERES:",200,'left');
-		$pdf->addText(400,76,11,"".number_format($dat_credito['interes'],2)."",150,'right');
+		$pdf->addText(400,76,11,"".number_format($dat_credito->interes,2)."",150,'right');
 
 		$pdf->addText(400,64,11,"TOTAL:",200,'left');
-		$pdf->addText(400,64,11,"".number_format($dat_credito['total'],2)."",150,'right');
+		$pdf->addText(400,64,11,"".number_format($dat_credito->total,2)."",150,'right');
 
 		$pdf->addText(400,52,11,"ABONO:",200,'left');
-		$pdf->addText(400,52,11,"".number_format($aportax['aporta'],2)."",150,'right');
+		$pdf->addText(400,52,11,"".number_format($aportax->aporta,2)."",150,'right');
 
 		$pdf->addText(400,40,11,"SALDO:",200,'left');
 		$pdf->addText(400,40,11,"".number_format($txt_saldo,2)."",150,'right');
@@ -117,12 +116,12 @@
 					'apor'=>'APORTACION'
 					);
 
-		$sql="select anio,if (estado=1,'A',if(estado=6,'Inicial',if(estado=7,'Reim',ROUND(quincena,0)))) as quin_nombre,saldo_anterior,monto,saldo_actual, observaciones from detallepago where idfolio='$id' and	idcredito='".$dat_credito['clv_cred']."' order by anio,quincena,iddetalle";
-		$resp=$db->general($sql,1);
+		$sql="select anio,if (estado=1,'A',if(estado=6,'Inicial',if(estado=7,'Reim',ROUND(quincena,0)))) as quin_nombre,saldo_anterior,monto,saldo_actual, observaciones from detallepago where idfolio='$id' and	idcredito='".$dat_credito->clv_cred."' order by anio,quincena,iddetalle";
+		$resp=$db->general_($sql,2);
 
 		$i=0;
 		foreach($resp as $key){
-			$data[$i]=array('anio'=>$key['anio'],'quin'=>$key['quin_nombre'],'apor'=>number_format($key['monto'],2));
+			$data[$i]=array('anio'=>$key->anio,'quin'=>$key->quin_nombre,'apor'=>number_format($key->monto,2));
 			$i++;
 		}
 

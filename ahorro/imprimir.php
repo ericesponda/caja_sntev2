@@ -1,12 +1,11 @@
 <?php
-	require_once("db_.php");
+	require_once("index.php");
 
-	$periodo = $_REQUEST['id'];
+	$periodo = $_REQUEST['periodo'];
 	$id=$_SESSION['idfolio'];
 	$anio_tmp=date("Y");
 
-	set_include_path('../librerias15/pdf2/src/'.PATH_SEPARATOR.get_include_path());
-	include 'Cezpdf.php';
+	include '../vendor/autoload.php';
 
 	$pdf = new Cezpdf('letter','portrait','color',array(255,255,255));
 	$pdf->selectFont('Helvetica');
@@ -42,23 +41,23 @@
 
 		$row=$db->afiliado();
 		$pdf->addText(40,640,10,"SOCIO:",0,'left');
-		$pdf->addText(100,640,10,trim($row['nombre'])." ".trim($row['ape_pat'])." ".trim($row['ape_mat']));
+		$pdf->addText(100,640,10,trim($row->nombre)." ".trim($row->ape_pat)." ".trim($row->ape_mat));
 		$pdf->line(100,637,570,637);
 
 		$pdf->addText(40,625,10,"R.F.C.: ",0,'left');
-		$pdf->addText(100,625,10,$row['Filiacion'],0,'left');
+		$pdf->addText(100,625,10,$row->Filiacion,0,'left');
 		$pdf->line(100,623,570,623);
 
 		$pdf->addText(40,610,10,"NO. SOCIO:",0,'left');
-		$pdf->addText(100,610,10,$row['idfolio'],0,'left');
+		$pdf->addText(100,610,10,$row->idfolio,0,'left');
 		$pdf->line(100,607,230,607);
 
 		$pdf->addText(250,610,10,"CLAVE PRES:",0,'left');
-		$pdf->addText(330,610,10,$row['c_psp'],0,'left');
+		$pdf->addText(330,610,10,$row->c_psp,0,'left');
 		$pdf->line(330,607,570,607);
 
 		$pdf->addText(40,595,10,"APORTACION:",0,'left');
-		$pdf->addText(100,595,10,number_format($row['a_qui']),70,'right');
+		$pdf->addText(100,595,10,number_format($row->a_qui),70,'right');
 		$pdf->line(100,592,190,592);
 
 		$pdf->setColor(0.9,0.9,0.9);
@@ -94,7 +93,7 @@
 			$sql="select idfolio,anio,ahorrototal,saldofinal,saldo_anterior,monto,interes,montointeres,interestotal,
 			if (retiro=1,'R',ROUND(quincena,0)) as quin_nombre,observaciones from registro where idfolio='$id' and '$periodo'=anio
 			order by anio,quincena,idregistro asc";
-			$resp=$db->general($sql,1);
+			$resp=$db->general_($sql,2);
 
 			$monto=0;
 			$anio=0;
@@ -103,33 +102,33 @@
 			$s_final=0;
 
 			foreach($resp as $key){
-				if($anio!=$key['anio']){
-					$anio=$key['anio'];
+				if($anio!=$key->anio){
+					$anio=$key->anio;
 					$monto=0;
 				}
-				$int_ant=$int_ant+$key['montointeres'];
-				$s_final=$key['saldofinal'] - $int_ant;
+				$int_ant=$int_ant+$key->montointeres;
+				$s_final=$key->saldofinal - $int_ant;
 
 
 				$totala="";
 				$totalr="";
 				$entra=0;
-				if ($key['monto']>0){
-					$totala=number_format($key['monto'],2);
+				if ($key->monto>0){
+					$totala=number_format($key->monto,2);
 					$entra=1;
-					$ahorrop+=$key['monto'];
+					$ahorrop+=$key->monto;
 				}
-				else if($key['monto']<0){
-					$monto=$key['saldofinal']-$monto;
+				else if($key->monto<0){
+					$monto=$key->saldofinal-$monto;
 					$ahorrop=$monto;
-					$totalr=number_format($key['monto'],2);
+					$totalr=number_format($key->monto,2);
 					$totala=number_format($s_final,2)."<-Saldo despues del retiro";
 					$entra=1;
 				}
 
 
 				if($entra==1){
-					$data[$i]=array('anio'=>$key['anio'],'quin'=>$key['quin_nombre'],'ret'=>$totalr,'apor'=>$totala);
+					$data[$i]=array('anio'=>$key->anio,'quin'=>$key->quin_nombre,'ret'=>$totalr,'apor'=>$totala);
 					$i++;
 				}
 			}
@@ -158,55 +157,56 @@
 			/////////INTERES AÑO Anterior
 			$ANIX=$anio_tmp-1;
 			$sql="select SUM(montointeres) as interestotal from registro where idfolio='$id' and anio='$ANIX' order by anio,quincena";
-			$anio_ant_interes=$db->general($sql,2);
-			$interes_anio_ant=number_format($anio_ant_interes['interestotal'],2);
+			$anio_ant_interes=$db->general_($sql,1);
+			$interes_anio_ant=number_format($anio_ant_interes->interestotal,2);
 
 			//////////////////////////Ahorro anterior
-			$P_INTERESANTERIOR=$anio_ant_interes['interestotal'];
+			$P_INTERESANTERIOR=$anio_ant_interes->interestotal;
 			$sql="select * from registro where idfolio='$id' and anio<$anio_tmp order by anio desc,quincena desc";
-			$anio_ant=$db->general($sql,2);
-			$xahorro_anterior=number_format($anio_ant['saldofinal']-$P_INTERESANTERIOR,2);
+			$anio_ant=$db->general_($sql,1);
+			$xahorro_anterior=number_format($anio_ant->saldofinal-$P_INTERESANTERIOR,2);
 
 
 			/////////////saldo año anterior
-			$saldo_anterior=number_format($anio_ant['saldofinal'],2);
+			$saldo_anterior=number_format($anio_ant->saldofinal,2);
 
 			//////Ahorro actual
 			$sql="select sum(monto) as monto from registro where idfolio='$id' and anio='$anio_tmp' and monto>=0";
-			$ahorro_tmp=$db->general($sql,2);
-			$actual=number_format($ahorro_tmp['monto'],2);
+			$ahorro_tmp=$db->general_($sql,1);
+			$actual=number_format($ahorro_tmp->monto,2);
 
 
 			////retiro actual
 			$sql="select sum(monto) as montoxy from registro where idfolio='$id' and anio='$anio_tmp' and registro.monto<0";
-			$retiro_tmp=$db->general($sql,2);
-			$r_actual=number_format($retiro_tmp['montoxy'],2);
+			$retiro_tmp=$db->general_($sql,1);
+			$r_actual=number_format($retiro_tmp->montoxy,2);
 
 			///////////AHORRO TOTAL
 			$sql="select sum(monto) as ahorroanual from registro where idfolio='$id' and anio='$anio_tmp' and registro.monto>0";
-			$ahorro_anual=$db->general($sql,2);
-			$ahorro_total=number_format($ahorro_anual['ahorroanual'],2);
+			$ahorro_anual=$db->general_($sql,1);
+			$ahorro_total=number_format($ahorro_anual->ahorroanual,2);
 
 			//////////////DISPONIBLE
 			$sql="select sum(monto) as monto,sum(montointeres) as interesx from registro where idfolio='$id' and anio='$anio_tmp'";
-			$ahorro=$db->general($sql,2);
-			$ahorronum=count($ahorro);
+			$ahorro=$db->general_($sql,1);
+
+			$ahorronum=$total = count((array)$ahorro);
 
 
 			$sql="select idfolio,anio,ahorrototal,saldofinal,saldo_anterior,monto,interes,montointeres,interestotal,if (retiro=1,'R',ROUND(quincena,0)) as quin_nombre,observaciones from registro where idfolio='$id' order by anio desc,quincena desc,idregistro desc";
-			$saldofinal=$db->general($sql,2);
+			$saldofinal=$db->general_($sql,1);
 
 			if ($ahorronum==0){
-				$val=$saldofinal['saldofinal'];
+				$val=$saldofinal->saldofinal;
 			}
 			else{
-				$val=$saldofinal['saldofinal']-$ahorro['interesx'];
+				$val=$saldofinal->saldofinal-$ahorro->interesx;
 			}
 			$disponible=$val;
 
 
 			////////interes
-			$interes=number_format($ahorro['interesx'],2);
+			$interes=number_format($ahorro->interesx,2);
 		/////////////////////////////////////////////////////
 
 		$sfinal=$disponible-500;
@@ -225,7 +225,7 @@
 		$pdf->addText(400,64,11,"$actual",150,'right');
 
 		$sql="select sum(monto) as montoxy from registro where idfolio='$id' and anio='$anio_tmp' and registro.monto<0";
-		$retiro_tmp=$db->general($sql,2);
+		$retiro_tmp=$db->general_($sql,1);
 		$pdf->addText(290,52,11,"RETIRO TOTAL DEL CICLO ACTUAL:",200,'left');
 		$pdf->addText(400,52,11,"$r_actual",150,'right');
 

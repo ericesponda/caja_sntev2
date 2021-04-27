@@ -7,8 +7,8 @@
   --sidebar-bg-color:#fde5d3;
   --sidebar-ft-color:#000;
   --fijaproceso-bg-color:#fff;
-
   --encabezado-bg-color:#F58634;
+  --footer-bg-color:#ff0;
 }
 
 .form-control{
@@ -37,7 +37,7 @@
 .grid-container {
   display: grid;
   grid-template-columns: 80px 1fr;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: 50px 1fr 10px;
   grid-template-areas:
     "sidenav header"
     "sidenav main"
@@ -48,7 +48,7 @@
 .grid-container.active {
    display: grid;
   grid-template-columns: 240px 1fr;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: 50px 1fr 10px;
   grid-template-areas:
     "sidenav header"
     "sidenav main"
@@ -76,7 +76,7 @@
 
 .footer {
   grid-area: footer;
-  background-color: #648ca6;
+  background-color: var(--footer-bg-color);
 }
 
 
@@ -390,3 +390,88 @@ body{
 
 }
 */
+
+
+
+/*------------------------------------------------------   TABLA    ------------------------------------------------------ */
+.tabla_v{
+  display: table;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  width:100%;
+  font-size: 14px;
+}
+.tabla_v .title-row{
+  display: table-caption;
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+
+  background-color:#fff4dc;
+  padding: 10px;
+  margin-bottom:10px;
+  border-radius:10px;
+
+  animation: fadeIn; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s; /* don't forget to set a duration! */
+
+  -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+}
+.tabla_v .header-row{
+  display: table-row;
+  font-weight: bold;
+  text-align: center;
+
+  background-color:#fff4dc;
+  border-left: 1px solid black;
+}
+.tabla_v .header-row > div:first-child {
+  border-left: 0;
+}
+.tabla_v .body-row{
+  display: table-row;
+  background-color:#fff;
+  margin:10px;
+}
+.tabla_v .body-row:hover{
+  background-color:#fbf9f4;
+  -webkit-box-shadow: 0px 0px 22px -2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 22px -2px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 22px -2px rgba(0,0,0,0.75);
+}
+.tabla_v .cell{
+  display: table-cell;
+  align-items:center;
+  border-bottom: .5px solid #e3e5e4;
+  padding: 5px;
+  padding: 5px;
+}
+@media (max-width: 700px){
+  .tabla_v .header-row{
+    display:none;
+  }
+  .tabla_v .body-row{
+    display: grid;
+    padding: 5px;
+    margin-bottom:3px;
+  }
+  .tabla_v .body-row .cell{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0;
+  }
+  .tabla_v .body-row div[data-titulo]{
+    display: flex;
+  }
+  .tabla_v .body-row div[data-titulo]::before{
+    content:attr(data-titulo);
+    width:50%;
+    text-align: left;
+    font-weight: bold;
+  }
+}

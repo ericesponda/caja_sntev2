@@ -1,403 +1,297 @@
 <?php
-	require_once("db_.php");
-  $row=$db->afiliado();
-  $folio=$row['idfolio'];
-  $filiacion=$row['Filiacion'];
-  $ape_pat=$row['ape_pat'];
-  $ape_mat=$row['ape_mat'];
-  $nombre=$row['nombre'];
-?>
-  <div id='reloj' style='display:none;
-        position:absolute;
-        float:right;
-        top:100;
-        right: 100px;
-        border-radius:10px;
-        background-color: #ffd6bb;
-        width:100px;
-        color:black;
-        padding:10px;
-        z-index:1000;
-        box-shadow: 10px 2px 5px #999;
-        -webkit-box-shadow: 10px 2px 5px #999;
-        -moz-box-shadow: 10px 2px 5px #999;
-        filter: shadow(color=#999999, direction=135, strength=2);'>
-  </div>
+require_once("../control_db.php");
 
-  <div class='container'>
-  	<form id='form_comision' action='' data-lugar='control_db' data-funcion='guardar_datos' data-destino='afiliado/datos'>
-  	  <input class='form-control' type='hidden' id='id' NAME='id' value='<?php echo $row['idfolio']; ?>' placeholder='No. Empleado' readonly>
-    	<div class='card'>
-	  		<div class='card-header'>
-	  			<img src='img/caja.png' width='20' alt='logo'> -
-	  			Programar cita
-	  		</div>
-	      <div class='card-body'>
-	        <div class='row'>
-	          <div class='col-xl-2 col-lg-2 col-md-2 col-sm-2'>
-	            <div class='form-group'>
-	              <label for='idfolio'>Socio</label>
-	              <input class='form-control form-control-sm' type='text' id='idfolio' NAME='idfolio' value='<?php echo $row['idfolio']; ?>' placeholder='No. Empleado' readonly>
-	            </div>
-	          </div>
+class Escritorio extends SNTE{
+	private $accesox;
+	private $comic;
+	private $editar;
 
-          <div class='col-xl-3 col-lg-3 col-md-3 col-sm-3'>
-            <div class='form-group'>
-              <label for='Filiacion'>Filiación</label>
-              <input class='form-control form-control-sm' type='text' id='Filiacion' NAME='Filiacion' value='<?php echo $filiacion; ?>' placeholder='Filiacion' readonly>
-            </div>
-          </div>
+	public function __construct(){
+		parent::__construct();
+	}
+	public function citas(){
+		$arreglo=array();
+		$maxcitas_retiros=5;   /////////////variable para maximo numero de citas
+		$maxcitas_creditos=3;   /////////////variable para maximo numero de citas
+		$max=0;
 
-					<?php
-          echo "<div class='col-xl-2 col-lg-4 col-md-4 col-sm-4'>";
-            echo "<div class='form-group'>";
-              echo "<label for='ape_pat'>A. Paterno</label>";
-              echo "<input class='form-control form-control-sm' type='text' id='ape_pat' NAME='ape_pat' value='$ape_pat' placeholder='APELLIDO PATERNO' readonly>";
-            echo "</div>";
-          echo "</div>";
+		try{
+			$desde=clean_var($_REQUEST['desde']);
+			$hora=clean_var($_REQUEST['hora']);
+			$tipo=clean_var($_REQUEST['tipo']);
 
-          echo "<div class='col-xl-2 col-lg-4 col-md-4 col-sm-4'>";
-            echo "<div class='form-group'>";
-              echo "<label for='ape_mat'>A. Materno</label>";
-              echo "<input class='form-control form-control-sm' type='text' id='ape_mat' NAME='ape_mat' value='$ape_mat' placeholder='APELLIDO MATERNO' readonly>";
-            echo "</div>";
-          echo "</div>";
+			$dia_semana=date("w", strtotime($desde));
 
-          echo "<div class='col-xl-3 col-lg-4 col-md-4 col-sm-4'>";
-            echo "<div class='form-group'>";
-              echo "<label for='nombre'>Nombre (s):</label>";
-              echo "<input class='form-control form-control-sm' type='text' id='nombre' NAME='nombre' value='$nombre' placeholder='NOMBRE (S)' readonly>";
-            echo "</div>";
-          echo "</div>";
-        echo "</div>";
-      echo "</div>";
-      echo "<div class='card-footer'>";
-        echo "<div class='btn-group'>";
-        echo "<button class='btn btn-warning btn-sm' type='button' onclick='citas_listas()'><i class='fas fa-history'></i>Bitacora de citas</button>";
-		      echo "<button class='btn btn-warning btn-sm' type='button' onclick='credito_p()'><i class='fas fa-money-check-alt'></i>Generar cita de Crédito</button>";
-		      echo "<button class='btn btn-warning btn-sm' type='button' onclick='retiro_p()'><i class='fas fa-university'></i>Generar cita de Retiro</button>";
-        echo "</div>";
-      echo "</div>";
-    echo "</div>";
-	  echo "<br>";
-
-
-		echo "<div id='checar'>";
-
-		echo "</div>";
-
-
-		echo "<div class='card'>";
-			echo "<div class='card-header'>";
-				echo "Recuerda que solo tienes derecho a una cancelación y a una cita, procura no faltar y llegar a tiempo por favor.";
-				echo "<br>";
-				echo"Todas las citas aquí generadas serán atendidas exclusivamente en las oficinas centrales de Pachuca.";
-			echo "</div>";
-		echo "</div>";
-	echo "</div>";
-?>
-
-<script>
-$(function(){
-	citas_listas();
-});
-function ver_cita(id){
-	$('#myModal').modal('show');
-	$("#modal_form").load("citas/info.php?id="+id);
-}
-function citas_listas(){
-  $.ajax({
-    url: "citas/citas.php",
-    type: "POST",
-    timeout:1000,
-    beforeSend: function () {
-      $("#cargando").addClass("is-active");
-    },
-    success:function(response){
-      $('#checar').html(response);
-      $("#cargando").removeClass("is-active");
-    }
-  });
-}
-function retiro_p(){
-  $.ajax({
-    url: "citas/retiro.php",
-    type: "POST",
-    timeout:10000,
-    beforeSend: function () {
-      $("#cargando").addClass("is-active");
-    },
-    success:function(response){
-      clearInterval(timerUpdate);
-      $("#reloj").hide();
-      $('#checar').html(response);
-      $("#cargando").removeClass("is-active");
-    },
-		error: function(jqXHR, textStatus, errorThrown) {
-			if(textStatus==="timeout") {
-				$("#cargando").removeClass("is-active");
-				$("#checar").html("<div class='container' style='background-color:white; width:300px'><center><img src='img/giphy.gif' width='300px'></center></div><br><center><div class='alert alert-danger' role='alert'>Ocurrio un error intente de nuevo en unos minutos, vuelva a entrar o presione ctrl + F5, para reintentar</div></center> ");
+			////////////para bloquear sabados y domingos
+			if($dia_semana==0 or $dia_semana==6){
+				$arreglo=array('activo'=>0, 'dato'=>"0", 'tipo'=>$tipo,'texto'=>"No hay horarios de atención sabados y domingos");
+				return json_encode($arreglo);
 			}
-		}
-  });
-}
-function credito_p(){
-  $.ajax({
-    url: "citas/credito.php",
-    type: "POST",
-    timeout:1000,
-    beforeSend: function () {
-      $("#cargando").addClass("is-active");
-    },
-    success:function(response){
-      clearInterval(timerUpdate);
-      $("#reloj").hide();
-      $('#checar').html(response);
-      $("#cargando").removeClass("is-active");
-    }
-  });
-}
-function confirmar_cita(){
-  var cita=$("#cita").val();
-  var tipo=$("#tipo").val();
-  var observaciones=$("#observaciones").val();
-  $.confirm({
-    icon: 'far fa-calendar-check',
-    title: 'Confirmar',
-    type: 'orange',
-    boxWidth: '800px',
-    content: '¿Desea confirmar la cita?',
-    buttons: {
-      Confirmar: function () {
-        $.ajax({
-          data: {
-            "function":"confirmar",
-            "observaciones":observaciones,
-            "cita":cita,
-            "tipo":tipo
-          },
-          url: "citas/db_.php",
-          type: "POST",
-          timeout:1000,
-          beforeSend: function () {
-          },
-          success:function(response){
-            var datos = JSON.parse(response);
-            if (datos.error==0){
-              Swal.fire({
-								type: 'success',
-								title: "Fecha confirmada",
-								showConfirmButton: false,
-								timer: 3000
-  						});
-              $.ajax({
-                url: "citas/citas.php",
-                type: "POST",
-                timeout:1000,
-                beforeSend: function () {
-                  $("#cargando").addClass("is-active");
-                },
-                success:function(response){
-                  $('#checar').html(response);
-                  $("#cargando").removeClass("is-active");
-                }
-              });
-							$("#reloj").hide();
-							clearInterval(timerUpdate);
-            }
-            else{
-              Swal.fire({
-								type: 'error',
-								title: "Error intente nuevamente",
-								showConfirmButton: false,
-								timer: 3000
-  						});
-            }
-          }
-        });
-      },
-      Cancelar: function () {
+			//////////termina bloqueo
 
-      }
-    }
-  });
-}
-function verificar(tipo){
-  var desde=$("#desde").val();
-  var hora=$("#hora").val();
-  var minuto=$("#minuto").val();
-  $.confirm({
-    icon: 'far fa-calendar-check',
-    title: 'Programar',
-    type: 'orange',
-    boxWidth: '800px',
-    content: '¿Programar una cita para el dia seleccionado?, <br>si se encuentra displonible tendrá 3 minutos para confirmar',
-    buttons: {
-      Programar: function () {
-        $.ajax({
-          data:  {
-            "function":"citas",
-            "desde":desde,
-            "hora":hora,
-            "minuto":minuto,
-            "tipo":tipo
-          },
-          url:   'citas/db_.php',
-          type:  'post',
-          success:  function (response) {
-            clearInterval(timerUpdate);
-            var datos = JSON.parse(response);
-            if (datos.activo==1){
-              $('#checar').html(datos.texto);
-              var fecha = new Date();
-              fecha.setMinutes(fecha.getMinutes() + 3);
-              countdown(fecha, 'reloj', '¡Finalizó!', datos.tipo);
-              $("#reloj").show();
-              Swal.fire({
-  								type: 'success',
-  								title: "Fecha disponible, tiene 3 minutos para confirmar",
-  								showConfirmButton: false,
-  								timer: 3000
-  						});
-            }
-            else{
-              Swal.fire({
-  								type: 'error',
-  								title: datos.texto,
-  								showConfirmButton: false,
-  								timer: 3000
-  						});
-            }
-          }
-        });
-      },
-      Cancelar: function () {
-
-      }
-    }
-  });
-}
-function cancela_cita(cita){
-  $.confirm({
-    icon: 'far fa-calendar-check',
-    title: 'Cancelar cita',
-    type: 'orange',
-    boxWidth: '800px',
-    content: '¿Desea cancelar la cita programada',
-    buttons: {
-      Aceptar: function () {
-        $.ajax({
-          data:  {
-            "function":"cancelar_cita",
-            "cita":cita
-          },
-          url:   'citas/db_.php',
-          type:  'post',
-          success:  function (response) {
-						var datos = JSON.parse(response);
-            if (datos.error==0){
-              Swal.fire({
-  								type: 'success',
-  								title: "Fecha cancelada correctamente",
-  								showConfirmButton: false,
-  								timer: 3000
-  						});
-              $.ajax({
-                url: "citas/citas.php",
-                type: "POST",
-                timeout:1000,
-                beforeSend: function () {
-                  $("#cargando").addClass("is-active");
-                },
-                success:function(response){
-                  $('#checar').html(response);
-                  $("#cargando").removeClass("is-active");
-                }
-              });
-            }
-            else{
-              Swal.fire({
-  								type: 'error',
-  								title: "error, favor de verificar",
-  								showConfirmButton: false,
-  								timer: 3000
-  						});
-            }
-          }
-        });
-      },
-      Salir: function () {
-
-      }
-    }
-  });
-}
-function cancela_previo(cita){
-	var cita=$("#cita").val();
-	var tipo=$("#tipo").val();
-
-	$.confirm({
-		icon: 'far fa-calendar-check',
-		title: 'Cancelar',
-		type: 'orange',
-		boxWidth: '800px',
-		content: '¿Desea cancelar la cita?',
-		buttons: {
-			Si: function () {
-				$.ajax({
-					data: {
-						"function":"pre_cancela",
-						"cita":cita,
-						"tipo":tipo
-					},
-					url: "citas/db_.php",
-					type: "POST",
-					timeout:1000,
-					beforeSend: function () {
-
-					},
-					success:function(response){
-						console.log(response);
-						if(response==1){
-							clearInterval(timerUpdate);
-							$("#reloj").hide();
-							Swal.fire({
-								type: 'success',
-								title: "Canceló",
-								showConfirmButton: false,
-								timer: 3000
-							});
-
-							$.ajax({
-								url: "citas/citas.php",
-								type: "POST",
-								timeout:1000,
-								beforeSend: function () {
-									$("#cargando").addClass("is-active");
-								},
-								success:function(response){
-									$('#checar').html(response);
-									$("#cargando").removeClass("is-active");
+			///////////retiro=1
+			///////////credito=2
+			////////////////////////////para asignar automaticamente
+			if($hora=="asignar"){
+				$fec=explode("-",clean_var($_REQUEST['desde']));
+				$x="";
+				$query="select count(fecha) as numero, fecha, TIME(fecha) as hora from citas where year(fecha)=".$fec[2]." and month(fecha)=".$fec[1]." and day(fecha)=".$fec[0]." and tipo='$tipo' and apartado=2 group by fecha order by fecha asc";
+				$sth = $this->dbh->prepare($query);
+				$sth->execute();
+				$resp=$sth->fetchAll();
+				$x="";
+				$arr_hora=array();
+				foreach($resp as $key){
+					$arr_hora[$key['hora']]=$key['numero'];
+				}
+				$sale=1;
+				if($tipo==1){	//////////////retiro
+					for($i=10; $i<=13 and $sale==1; $i++){
+						for($j=0; $j<=55 and $sale==1; $j=$j+5){
+							$h=str_pad($i,2,"0",STR_PAD_LEFT);
+							$t=str_pad($j,2,"0",STR_PAD_LEFT);
+							$hora="$h:$t:00";
+							if(isset($arr_hora[$hora])){
+								if($arr_hora[$hora]<5){ //maximo numero de citas de retiro en busqueda automatica
+									$sale=0;
 								}
-							});
-
-						}
-						else{
-							Swal.fire({
-								type: 'error',
-								title: "Error, favor de intentar nuevamente",
-								showConfirmButton: false,
-								timer: 3000
-							});
+							}
+							else{
+								$sale=0;
+							}
 						}
 					}
-				});
-			},
-			No: function () {
-
+				}
+				if($tipo==2){	//////////////credito
+					for($i=10; $i<=13 and $sale==1; $i++){
+						for($j=0; $j<=45 and $sale==1; $j=$j+10){
+							$h=str_pad($i,2,"0",STR_PAD_LEFT);
+							$t=str_pad($j,2,"0",STR_PAD_LEFT);
+							$hora="$h:$t:00";
+							if(isset($arr_hora[$hora])){
+								if($arr_hora[$hora]<3){ //maximo numero de citas de creditos en busqueda automatica
+									$sale=0;
+								}
+							}
+							else{
+								$sale=0;
+							}
+						}
+					}
+				}
+				if($sale==1){
+					$arreglo=array('activo'=>0, 'dato'=>"0", 'tipo'=>$tipo,'texto'=>"No hay disponibilidad para el dia seleccionado");
+					return json_encode($arreglo);
+				}
 			}
+			else{
+				$hora.=":00";
+			}
+			///////////////////////////hasta aqui
+
+			$verifica = date("Y-m-d", strtotime($desde));
+			if($tipo==1){
+				$max=$maxcitas_retiros;
+				$bloq="select * from diasno where fecha='$verifica'";
+			}
+			if($tipo==2){
+				$max=$maxcitas_creditos;
+				$bloq="select * from diasnocred where fecha='$verifica'";
+			}
+			//////////////////comprueba que efectivamente no este el dia bloqueado;
+			$sth = $this->dbh->prepare($bloq);
+			$sth->execute();
+			if($sth->rowCount()>0){
+				$arreglo=array('activo'=>0, 'dato'=>"0", 'tipo'=>$tipo,'texto'=>"No hay disponibilidad para el horario seleccionado");
+				return json_encode($arreglo);
+			}
+			////////////////hasta aqui
+
+			$actual=date('Y-m-d H:i:s');
+			$fechax = date("Y-m-d", strtotime($desde))." $hora";
+			$limite=new DateTime();
+			$limite->modify("+6 minute");
+
+			$sql="select * from citas where tipo='$tipo' and fecha='$fechax' and (apartado=2 or (apartado=1 and limite>'$actual'))";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			$reg=$sth->rowCount();
+
+			if($reg<$max){
+				$sql="select * from citas where tipo='$tipo' and fecha='$fechax' and (apartado=1 and limite<'$actual')";
+				$sth = $this->dbh->prepare($sql);
+				$sth->execute();
+
+				$arreglo+=array('idfolio'=>$_SESSION['idfolio']);
+				$arreglo+=array('fecha'=>$fechax);
+				$arreglo+=array('caja'=>1);
+				$arreglo+=array('apartado'=>1);
+				$arreglo+=array('limite'=>$limite->format('Y-m-d H:i:s'));
+				$arreglo+=array('fcreado'=>$actual);
+				$arreglo+=array('tipo'=>$tipo);
+
+				if($sth->rowCount()==0){
+					$arreglo+=array('caja'=>1);
+					$x=$this->insert('citas', $arreglo);
+				}
+				else{
+					$tmp=$sth->fetch(PDO::FETCH_OBJ);
+					$x=$this->update('citas',array('id'=>$tmp->id), $arreglo);
+				}
+				$cita=json_decode($x);
+
+				$t="<div class='card'>";
+					$t.="<div class='card-header'>";
+						$t.="Confirmar";
+					$t.="</div>";
+					$t.="<div class='card-body'>";
+					$t.= "<input class='form-control' type='hidden' id='tipo' name='tipo' value='$tipo' readonly>";
+						$t.="<div class='row'>";
+							$t.= "<div class='col-3'>";
+									$t.= "<label># Cita</label>";
+									$t.= "<input class='form-control' type='text' id='cita' name='cita' value='$cita->id' readonly>";
+							$t.= "</div>";
+							$t.= "<div class='col-3'>";
+									$t.= "<label>Fecha</label>";
+									$t.= "<input class='form-control' type='text' id='desde' name='desde' value='$desde' readonly>";
+							$t.= "</div>";
+							$t.= "<div class='col-3'>";
+									$t.= "<label>Hora</label>";
+									$t.= "<input class='form-control' type='text' id='hora' name='hora' value='$hora' readonly>";
+							$t.= "</div>";
+							$t.= "<div class='col-12'>";
+									$t.= "<label>Observaciones</label>";
+									$t.= "<input class='form-control' type='text' id='observaciones' name='observaciones' value='' placeholder='Observaciones'>";
+							$t.= "</div>";
+						$t.= "</div>";
+						$t.="<div class='row'>";
+							$t.= "<div class='col-12'>";
+								$t.="<div class='btn-group'>";
+									$t.= "<button class='btn btn-danger btn-sm' type='button' onclick='confirmar_cita()'><i class='far fa-calendar-check'></i>Confirmar cita</button>";
+									$t.= "<button class='btn btn-warning btn-sm' type='button' onclick='cancela_previo()'><i class='far fa-trash-alt'></i>Cancelar</button>";
+								$t.="</div>";
+							$t.="</div>";
+						$t.="</div>";
+					$t.="</div>";
+				$t.="</div>";
+				$arreglo=array('activo'=>1, 'dato'=>$x, 'tipo'=>$tipo, 'texto'=>$t);
+			}
+			else{
+				$arreglo=array('activo'=>0, 'dato'=>"0", 'tipo'=>$tipo,'texto'=>"No hay disponibilidad para el horario seleccionado");
+			}
+			return json_encode($arreglo);
 		}
-	});
+		catch(PDOException $e){
+			return "Database access FAILED!".$e->getMessage();
+		}
+	}
+	public function confirmar(){
+		try{
+			$cita=clean_var($_REQUEST['cita']);
+			$observaciones=clean_var($_REQUEST['observaciones']);
+			$actual=date('Y-m-d H:i:s');
+			$arreglo=array();
+			$arreglo+=array('idfolio'=>$_SESSION['idfolio']);
+			$arreglo+=array('fcreado'=>$actual);
+			$arreglo+=array('apartado'=>2);
+			$arreglo+=array('observaciones'=>$observaciones);
+			$x=$this->update('citas',array('id'=>$cita), $arreglo);
+			if($x){
+				$arreglo=array('id'=>0,'error'=>0, 'terror'=>"");
+			}
+			else{
+				$arreglo=array('id'=>0,'error'=>1, 'terror'=>$x);
+			}
+			return json_encode($arreglo);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED!".$e->getMessage();
+		}
+	}
+	public function citas_lista($tipo){
+		try{
+
+			$fecha=date('Y-m-d')." 00:00:00";
+			$sql="select * from citas left outer join afiliados on afiliados.idfolio=citas.idfolio
+			where apartado=2 and tipo='$tipo' and fecha>='$fecha'";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetchAll();
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+	public function citas_bloqueo(){	//para los dias de retiro
+		try{
+			$sql="select * from diasno";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetchAll();
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+	public function citas_bloqueocred(){ //para los dias de creditos
+		try{
+
+			$sql="select * from diasnocred";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetchAll();
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+	public function cita_ver($id){
+		try{
+
+			$fecha=date('Y-m-d')." 00:00:00";
+			$sql="select citas.*, afiliados.nombre, afiliados.ape_pat, afiliados.ape_mat, afiliados.Filiacion from citas left outer join afiliados on afiliados.idfolio=citas.idfolio
+			where citas.id='$id'";
+			$sth = $this->dbh->prepare($sql);
+			$sth->execute();
+			return $sth->fetch(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+	public function citas_afiliados(){
+		try{
+			$fecha=date('Y-m-d')." 00:00:00";
+		//	$sql="select * from citas where idfolio=:idfolio and (apartado=2 or apartado=3) and fecha>='$fecha' order by fecha desc";
+			$sql="select * from citas where idfolio=:idfolio and (apartado=2 or apartado=3) order by fecha desc";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":idfolio",$_SESSION['idfolio']);
+			$sth->execute();
+			return $sth->fetchAll(PDO::FETCH_OBJ);
+		}
+		catch(PDOException $e){
+			return "Database access FAILED! ".$e->getMessage();
+		}
+	}
+	public function cancelar_cita(){
+		$cita=clean_var($_REQUEST['cita']);
+		$arreglo=array();
+		$arreglo+=array('apartado'=>3);
+		$arreglo+=array('realizada'=>2);
+		$x=$this->update('citas',array('id'=>$cita), $arreglo);
+		return $x;
+	}
+	public function pre_cancela(){
+		$cita=clean_var($_REQUEST['cita']);
+		$x=$this->borrar('citas',"id",$cita);
+		return $x;
+	}
 }
 
-</script>
+$db = new Escritorio();
+if(strlen($function)>0){
+  echo $db->$function();
+}
+
+
+?>

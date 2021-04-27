@@ -8,7 +8,7 @@
 		die();
 	}
 
-		$clv_cred = $_REQUEST['clv_cred'];
+	$clv_cred = $_REQUEST['clv_cred'];
 
 	$id=$_SESSION['idfolio'];
 
@@ -42,6 +42,14 @@
 	$s_saldo=$dat_credito['total']-$aportax['aporta'];
 	$txt_saldo=$s_saldo;
 
+		echo "<div class='card mt-3'>";
+			echo "<div class='card-body'>";
+					echo "<button type='button' class='btn btn-warning btn-sm ml-1' id='imprimex' title='Imprimir'	xapp='print' title='Imprimir' xdes='creditos/imprimir' v_tipo='1' v_cred='$clv_cred'><i class='fas fa-print'></i><br><small>Imprimir</small></button>";
+			echo "</div>";
+		echo "</div>";
+
+		echo "<div class='card mt-3'>";
+			echo "<div class='card-body'>";
 				echo "<input class='form-control' type='hidden' id='id' NAME='id' value='".$txt_credito."' placeholder='Crédito' readonly>";
 
 				echo "<div class='row'>";
@@ -118,34 +126,40 @@
 				echo "</div>";
 
 			echo "</div>";
+		echo "</div>";
 
-			echo "<hr>";
-			echo "<table class='table table-striped table-sm'>";
-			echo "<thead>";
-			echo "<tr><th><center>Año</center></th><th><center>Quincena</center></th>";
-			echo "<th><center>Monto</center></th><th ><center>Saldo actual</center></th>";
-			echo "</tr>";
-			echo "</thead><tbody>";
-			foreach($c_detalle as $key){
-				echo "<tr>";
-					echo "<td><center>";
-					echo $key['anio'];
-					echo "</td>";
+		echo "<div class='card mt-3'>";
+			echo "<div class='card-body'>";
 
-					echo "<td><center>";
-					echo $key['quin_nombre'];
-					echo "</td>";
+			echo "<div class='tabla_v mt-2' id='tabla_css'>";
+				echo "<div class='header-row'>";
+					echo "<div class='cell'>Año</div>";
+					echo "<div class='cell'>Quincena</div>";
+					echo "<div class='cell'>Monto</div>";
+					echo "<div class='cell'>Saldo actual</div>";
+				echo "</div>";
 
-					echo "<td class = 'text-right'>$ ";
-					echo number_format($key['monto'],2);
-					echo "</td>";
+				foreach($c_detalle as $key){
+					echo "<div class='body-row'>";
+						echo "<div class='cell text-center' data-titulo='Año'>";
+						echo $key['anio'];
+						echo "</div>";
 
-					echo "<td class = 'text-right'>$ ";
-					echo number_format($key['saldo_actual'],2);
-					echo "</td>";
+						echo "<div class='cell text-center' data-titulo='Quincena'>";
+						echo $key['quin_nombre'];
+						echo "</div>";
 
-				echo "</tr>";
-			}
-			echo "</table>";
+						echo "<div class='cell text-right' data-titulo='Monto'>$";
+						echo number_format($key['monto'],2);
+						echo "</div>";
+
+						echo "<div class='cell text-right' data-titulo='Saldo'>$";
+						echo number_format($key['saldo_actual'],2);
+						echo "</div>";
+
+					echo "</div>";
+				}
+				echo "</div>";
+			echo "</div>";
 		echo "</div>";
 ?>

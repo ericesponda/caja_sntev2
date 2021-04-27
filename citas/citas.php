@@ -1,5 +1,5 @@
 <?php
-	require_once("db_.php");
+	require_once("index.php");
   $resp=$db->citas_afiliados();
   echo "<div class='container-fluid'>";
 	echo "<br><h5>Bitácora de Citas</h5><hr>";

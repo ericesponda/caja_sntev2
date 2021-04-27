@@ -33,7 +33,7 @@
       echo "<form id='benef' xform='form' xctrl='beneficiarios/' xopt='guardar_beneficiarios' xdes='beneficiarios/beneficiarios' xdiv='contenido'>";
       echo "<input class='form-control' type='hidden' id='id' NAME='id' value='$idfolio'  >";
       echo "<div class='card mt-3'>";
-    		echo "<div class='card-header'>";
+    		echo "<div class='card-body'>";
           echo "<img src='img/caja.png' width='20' alt='logo'> - ";
     			echo "Beneficiarios";
     		echo "</div>";

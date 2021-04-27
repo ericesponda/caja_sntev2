@@ -1,7 +1,7 @@
 <?php
 require_once("../control_db.php");
 
-class Escritorio extends Sagyc{
+class Escritorio extends SNTE{
 	private $accesox;
 	private $comic;
 	private $editar;
@@ -23,7 +23,7 @@ class Escritorio extends Sagyc{
 	public function guardar_bancos(){			////////PARA CAMBIOS DE DATOS
 		$x="";
 		$arreglo =array();
-		$id=clean_var($_REQUEST['id']);
+		$id=clean_var($_SESSION['idfolio']);
 		if(strlen($id)==0){
 			$arr=array();
 			$arr+=array('error'=>1);

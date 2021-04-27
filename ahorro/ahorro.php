@@ -1,5 +1,5 @@
 <?php
-	require_once("db_.php");
+	require_once("index.php");
 	$anio_tmp=date("Y");
 
 	$alerta=$db->blog_alerta();
@@ -15,13 +15,14 @@
 	$ahorronum=count($db->ahorro($anio_tmp));
 
 	echo "<div class='container'>";
-		echo "<div class='card'>";
-			echo "<div class='card-header'>";
+		echo "<div class='card mt-3'>";
+			echo "<div class='card-body'>";
 				echo "<img src='img/caja.png' width='20' alt='logo'> - ";
 				echo "Caja de ahorro";
 			echo "</div>";
+		echo "</div>";
 
-
+		echo "<div class='card mt-3'>";
 			echo "<div class='card-body'>";
 				echo "<div class='row'>";
 					/////////INTERES AÑO Anterior
@@ -63,17 +64,12 @@
 
 			echo "<div class='card-footer'>";
 				echo "<div class='row'>";
-					echo "<div class='col-sm-6'>";
-						echo "<div class='btn-group'>";
-							echo "<a class='btn btn-warning btn-sm' href='#afiliado/index' title='regresar'><i class='fas fa-undo-alt'></i>Regresar</a>";
-						echo "</div>";
-					echo "</div>";
 
 					echo "<div class='col-sm-2'>";
 					echo "<label for='idfolio'>Periodo:</label>";
 					echo "</div>";
 					echo "<div class='col-sm-2'>";
-					echo "<select class='form-control' name='periodo' id='periodo' class='form-control'>";
+					echo "<select class='form-control form-select' name='periodo' id='periodo' class='form-control'>";
 					echo "<option value='' disabled selected style='color: silver;'>Seleccione un periodo</option>";
 						$contar=date("Y")-1;
 						while ($contar<=date("Y")){
@@ -83,7 +79,7 @@
 					echo  "</select>";
 					echo "</div>";
 					echo "<div class='col-sm-2'>";
-						echo "<button class='btn btn-warning btn-sm' id='imprime_comision' title='Imprimir' data-lugar='ahorro/imprimir' data-tipo='1' data-select='periodo' type='button'><i class='fas fa-print'></i>Imprimir</button>";
+						echo "<button type='button' class='btn btn-warning btn-sm' id='imprime' xapp='printcmb' title='Imprimir' xdes='ahorro/imprimir' v_tipo='1' xcmb='periodo' ><i class='fas fa-print'></i>Imprimir</button>";
 					echo "</div>";
 				echo "</div>";
 			echo "</div>";

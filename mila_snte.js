@@ -310,10 +310,10 @@ const preproceso_db = (e) => {
     formData.append("function", datos.xopt);
 
     for (let contar = 0; contar < e.attributes.length; contar++) {
-        let arrayDeCadenas = e.attributes[contar].name.split("_");
-        if (arrayDeCadenas.length > 1) {
-            formData.append(arrayDeCadenas[1], e.attributes[contar].value);
-        }
+      let arrayDeCadenas = e.attributes[contar].name.split("_");
+      if (arrayDeCadenas.length > 1) {
+          formData.append(arrayDeCadenas[1], e.attributes[contar].value);
+      }
     }
 
     if (xapp == "print") {
@@ -329,6 +329,25 @@ const preproceso_db = (e) => {
         cargando_div(false);
         return;
     }
+    if (xapp == "printcmb") {
+      cargando_div(true);
+      let xcmb;
+      e.attributes.xcmb !== undefined ? xcmb = e.attributes.xcmb.nodeValue : xcmb = "";
+
+      val=document.getElementById(xcmb).value;
+      let cadena = "?";
+      for (let contar = 0; contar < e.attributes.length; contar++) {
+          let arrayDeCadenas = e.attributes[contar].name.split("_");
+          if (arrayDeCadenas.length > 1) {
+              cadena += arrayDeCadenas[1] + "=" + e.attributes[contar].value + "&";
+          }
+      }
+      cadena += xcmb + "=" + val + "&";
+      VentanaCentrada(xdes + ".php" + cadena, 'Impresion', '', '1024', '768', 'true');
+      cargando_div(false);
+      return;
+    }
+
     if (xapp == "menu") {
         console.log("menu");
         location.hash = xdes;

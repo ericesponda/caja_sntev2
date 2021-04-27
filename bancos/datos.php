@@ -1,19 +1,19 @@
 <?php
-	require_once("db_.php");
+	require_once("index.php");
 
 	$row=$db->afiliado();
-	$idfolio=$row['idfolio'];
-	$filiacion=$row['Filiacion'];
-	$ape_pat=$row['ape_pat'];
-	$ape_mat=$row['ape_mat'];
-	$nombre=$row['nombre'];
+	$idfolio=$row->idfolio;
+	$filiacion=$row->Filiacion;
+	$ape_pat=$row->ape_pat;
+	$ape_mat=$row->ape_mat;
+	$nombre=$row->nombre;
 
-	$tipo_cuenta=$row['tipo_cuenta'];
-	$num_cuenta=$row['num_cuenta'];
-	$clave_banco=$row['clave_banco'];
+	$tipo_cuenta=$row->tipo_cuenta;
+	$num_cuenta=$row->num_cuenta;
+	$clave_banco=$row->clave_banco;
 
 	echo "<div class='container' id='div_trabajo'>";
-	echo "<form id='form_comision' action='' data-lugar='bancos/db_' data-funcion='guardar_bancos' data-destino='bancos/datos' data-div='div_trabajo'>";
+	echo "<form id='bancs' xform='form' xctrl='bancos/' xopt='guardar_bancos' xdes='bancos/datos' xdiv='contenido'>";
 	  echo "<input class='form-control form-control-sm' type='hidden' id='id' NAME='id' value='$idfolio' readonly>";
   echo "<div class='card'>";
 		echo "<div class='card-header'>";
@@ -25,7 +25,7 @@
         echo "<div class='col-xl-2 col-lg-2 col-md-2 col-sm-3'>";
           echo "<div class='form-group'>";
             echo "<label for='idfolio'>Socio</label>";
-            echo "<input class='form-control form-control-sm' type='text' id='idfolio' NAME='idfolio' value='".$row['idfolio']."' placeholder='No. Empleado' readonly>";
+            echo "<input class='form-control form-control-sm' type='text' id='idfolio' NAME='idfolio' value='".$row->idfolio."' placeholder='No. Empleado' readonly>";
           echo "</div>";
         echo "</div>";
 

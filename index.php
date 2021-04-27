@@ -162,7 +162,7 @@
 					echo "<hr>";
 
 					echo "<li>";
-						echo "<a xapp='menu' xdes='citas/index'>";
+						echo "<a xapp='menu' xdes='citas/principal'>";
 						echo "<i class='far fa-calendar-check'></i>";
 						echo "<span class='links_name'>Citas</span>";
 						echo "</a>";
@@ -235,11 +235,11 @@
 </body>
 
 	<!--   Core JS Files   -->
-	 <!--
+
 	<script src="lib/jquery-3.5.1.js" type="text/javascript"></script>
 	<script src="lib/jquery/jquery-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="lib/jquery/jquery-ui.min.css" />
-	-->
+	
 
 	<!--   url   -->
 
