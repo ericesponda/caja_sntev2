@@ -9,6 +9,8 @@
         $_SESSION['des']=0;   ///////////////cambiar esta para acceder a modo desarrollador
     }
 
+    $_SESSION['des']=1;
+
     if($_SESSION['des']==1){
         error_reporting(E_ALL);
         ini_set('display_errors', '1');

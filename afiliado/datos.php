@@ -287,7 +287,7 @@ echo "<div class='container' id='div_trabajo'>";
 				echo "<div class='card-footer'>";
 					echo "<div class='row'>";
 						echo "<div class='col-6'>";
-							echo "<button type='button' class='btn btn-warning btn-sm' type='button' xapp='btn' xctrl='afiliado/index' xopt='cancela_datos' xqa='¿Desea cancelar la actualizción de información' xdes='afiliado/datos' xdiv='contenido'><i class='fas fa-eraser'></i>Cancelar cambios</button>";
+							echo "<button type='button' class='btn btn-warning btn-sm' type='button' xapp='btn' xctrl='afiliado/' xopt='cancela_datos' xqa='¿Desea cancelar la actualizción de información' xdes='afiliado/datos' xdiv='contenido'><i class='fas fa-eraser'></i>Cancelar cambios</button>";
 						echo "</div>";
 					echo "</div>";
 				echo "</div>";
@@ -297,48 +297,3 @@ echo "<div class='container' id='div_trabajo'>";
 echo "</div>";
 
 ?>
-
-<script type="text/javascript">
-
-	function cancela_datos(){
-		$.confirm({
-			title: 'Cancelar',
-			content: '¿Desea cancelar la actualización de información?',
-			buttons: {
-				Aceptar: function () {
-					$.ajax({
-	 					data:  {
-							"function":"cancela_datos"
-	 					},
-	 					url:  "afiliado/db_.php",
-	 					type:  'post',
-		 				success:  function (response) {
-							$("#div_trabajo").load("afiliado/datos.php");
-							var datos = JSON.parse(response);
-							if (datos.error==0){
-								$("#datos_c").remove();
-								Swal.fire({
-									type: 'success',
-									title: "Se canceló correctamente",
-									showConfirmButton: false,
-									timer: 1000
-								});
-							}
-							else{
-								Swal.fire({
-									type: 'error',
-									title: "Error favor de verificar",
-									showConfirmButton: false,
-									timer: 2000
-								});
-							}
-		 				}
-	 				});
-				},
-				Regresar: function () {
-
-				}
-			}
-		});
-	}
-</script>

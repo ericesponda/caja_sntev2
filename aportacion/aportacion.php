@@ -1,38 +1,40 @@
 <?php
-	require_once("db_.php");
+	require_once("index.php");
 
   $alerta=$db->blog_alerta();
   echo "<div class='container' id='trabajo'>";
   foreach($alerta as $key){
     echo "<div class='alert alert-success'>";
-    echo $key['corto'];
+    echo $key->corto;
     echo "</div>";
   }
 
   $row=$db->afiliado();
-  $idfolio=$row['idfolio'];
-  $filiacion=$row['Filiacion'];
-  $ape_pat=$row['ape_pat'];
-  $ape_mat=$row['ape_mat'];
-  $nombre=$row['nombre'];
-  $a_qui=$row['a_qui'];
+  $idfolio=$row->idfolio;
+  $filiacion=$row->Filiacion;
+  $ape_pat=$row->ape_pat;
+  $ape_mat=$row->ape_mat;
+  $nombre=$row->nombre;
+  $a_qui=$row->a_qui;
 
     echo "<div class='container' id='div_trabajo'>";
-    	echo "<form id='form_comision' action='' data-lugar='aportacion/db_' data-funcion='guardar_aportacion' data-destino='aportacion/aportacion' data-div='div_trabajo'>";
+    	echo "<form id='formaport' xform='form' xctrl='aportacion/' xopt='guardar_aportacion' xdes='aportacion/aportacion' xdiv='contenido'>";
       echo "<input class='form-control' type='hidden' id='id' NAME='id' value='$idfolio' placeholder='No. Empleado' readonly>";
 
-      echo "<div class='card'>";
-    		echo "<div class='card-header'>";
+      echo "<div class='card mt-3'>";
+    		echo "<div class='card-body'>";
           echo "<img src='img/caja.png' width='20' alt='logo'> - ";
     			echo "Aportacion";
     		echo "</div>";
+      echo "</div>";
 
+      echo "<div class='card mt-3'>";
         echo "<div class='card-body'>";
           echo "<div class='row'>";
             echo "<div class='col-xl-2 col-lg-2 col-md-2 col-sm-3'>";
               echo "<div class='form-group'>";
                 echo "<label for='idfolio'>Socio</label>";
-                echo "<input class='form-control' type='text' id='idfolio' NAME='idfolio' value='".$row['idfolio']."' placeholder='No. Empleado' readonly>";
+                echo "<input class='form-control' type='text' id='idfolio' NAME='idfolio' value='".$row->idfolio."' placeholder='No. Empleado' readonly>";
               echo "</div>";
             echo "</div>";
 
@@ -77,7 +79,7 @@
         echo "</div>";
 
         $row=$db->blo_lista();
-        $faportacion=fecha($row['faportacion']);
+        $faportacion=fecha($row->faportacion);
         $fecha_actual = strtotime(date("Y-m-d H:i:s",time()));
         $fecha_entrada = strtotime($faportacion);
 
@@ -100,7 +102,7 @@
       echo "</div>";
     	echo "</form>";
 
-      if(is_array($cambio)){
+      if($cambio){
         echo "<br><div class='card' id='datos_c'>";
           echo "<div class='card-header'>";
             echo "<i class='fas fa-exclamation'></i> Datos generales actuales pendientes por actualizar - en breve serán actualizados en las oficinas de caja de ahorro";
@@ -109,7 +111,7 @@
             echo "<div class='row'>";
               echo "<div class='col-4'>";
               echo "<label>Aportación Total Para Ahorro</label>";
-              echo "<input class='form-control' type='text' id='a_qui1' NAME='a_qui1' value='" .number_format($cambio['a_qui'],2)."' placeholder='Aportacion Ahorro' readonly>";
+              echo "<input class='form-control' type='text' id='a_qui1' NAME='a_qui1' value='" .number_format($cambio->a_qui,2)."' placeholder='Aportacion Ahorro' readonly>";
               echo "</div>";
               ///////////////////////////////
             echo "</div>";
@@ -117,7 +119,7 @@
           echo "<div class='card-footer'>";
             echo "<div class='row'>";
               echo "<div class='col-6'>";
-                echo "<button class='btn btn-warning btn-sm' type='button' onclick='cancela_aporta()'><i class='fas fa-eraser'></i>Cancelar cambios</button>";
+                echo "<button type='button' class='btn btn-warning btn-sm' xapp='btn' xctrl='aportacion/' xopt='cancela_aporta' xdes='aportacion/aportacion' xdiv='contenido'><i class='fas fa-eraser'></i>Cancelar cambios</button>";
               echo "</div>";
             echo "</div>";
           echo "</div>";
@@ -170,3 +172,4 @@
     });
   }
 </script>
+

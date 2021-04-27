@@ -238,11 +238,12 @@
 </body>
 
 	<!--   Core JS Files   -->
-
+	 <!--
 	<script src="lib/jquery-3.5.1.js" type="text/javascript"></script>
 	<script src="lib/jquery/jquery-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="lib/jquery/jquery-ui.min.css" />
-
+	-->
+	
 	<!--   url   -->
 
 	<!-- Animation library for notifications   -->

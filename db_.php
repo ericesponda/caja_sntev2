@@ -6,8 +6,8 @@ class dashboard extends SNTE{
 		parent::__construct();
 	}
 	public function blo_lista(){
-			$sql="select * from bit_bloques limit 1";
-			return $this::general_($sql,1);
+		$sql="select * from bit_bloques limit 1";
+		return $this::general_($sql,1);
 	}
 	
 }

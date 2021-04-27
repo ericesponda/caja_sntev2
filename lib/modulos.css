@@ -7,6 +7,8 @@
   --sidebar-bg-color:#fde5d3;
   --sidebar-ft-color:#000;
   --fijaproceso-bg-color:#fff;
+
+  --encabezado-bg-color:#F58634;
 }
 
 .form-control{
@@ -43,7 +45,7 @@
 /* Give every child element its grid name */
 .header {
   grid-area: header;
-  background-color: #648ca6;
+  background-color:var(--encabezado-bg-color);
 }
 
 .sidebar {

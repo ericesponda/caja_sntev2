@@ -1,7 +1,7 @@
 <?php
 require_once("../control_db.php");
 
-class Escritorio extends Sagyc{
+class Escritorio extends SNTE{
 	private $accesox;
 	private $comic;
 	private $editar;

@@ -1,7 +1,19 @@
 <?php
 require_once("../control_db.php");
 
-class Escritorio extends Sagyc{
+
+if($_SESSION['des']==1 and strlen($function)==0)
+{
+	echo "<div class='alert alert-primary' role='alert' style='font-size:10px'>";
+	$arrayx=explode('/', $_SERVER['SCRIPT_NAME']);
+	echo print_r($arrayx);
+	echo "<br>";
+	echo print_r($_REQUEST);
+	echo "</div>";
+}
+
+
+class Escritorio extends SNTE{
 	private $accesox;
 	private $comic;
 	private $editar;
@@ -72,11 +84,14 @@ class Escritorio extends Sagyc{
 			$arreglo+=array('nombre'=>$row['nombre']);
 			$arreglo+=array('ape_pat'=>$row['ape_pat']);
 			$arreglo+=array('ape_mat'=>$row['ape_mat']);
-			$x=$this->insert('bit_datos', $arreglo);
+			$x=$this->insert_('bit_datos', $arreglo);
 			return $x;
 		}
 		else{
-			return "No hay cambios...";
+			$arr=array();
+			$arr+=array('error'=>1);
+			$arr+=array('terror'=>"No hay cambios");
+			return json_encode($arr);
 		}
 	}
 	public function cancela_aporta(){
@@ -90,7 +105,7 @@ class Escritorio extends Sagyc{
 		$sth->execute();
 		$row=$sth->fetch();
 
-		$x=$this->borrar('bit_datos','id',$row['id']);
+		$x=$this->borrar_('bit_datos','id',$row['id']);
 		if($x){
 			$arr=array();
 			$arr+=array('error'=>0);

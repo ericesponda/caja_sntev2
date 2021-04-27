@@ -1,6 +1,16 @@
 <?php
 require_once("../control_db.php");
 
+if($_SESSION['des']==1 and strlen($function)==0)
+{
+	echo "<div class='alert alert-primary' role='alert' style='font-size:10px'>";
+	$arrayx=explode('/', $_SERVER['SCRIPT_NAME']);
+	echo print_r($arrayx);
+	echo "<br>";
+	echo print_r($_REQUEST);
+	echo "</div>";
+}
+
 class Escritorio extends SNTE{
 	private $accesox;
 	private $comic;
@@ -10,38 +20,7 @@ class Escritorio extends SNTE{
 		parent::__construct();
 	}
 
-	public function afiliado(){
-			$sql="select * from afiliados where idfolio=".$_SESSION['idfolio'];
-			return $this::general_($sql,1);
-	}
-	public function blo_lista(){
-			$sql="select * from bit_bloques limit 1";
-			return $this::general_($sql,1);
-	}
-	public function cambios($tipo,$idfolio){
-		if($tipo=="pass"){					///////////////////////Contraseña
-			$sql="select * from bit_datos where idfolio=:idfolio and up_pass=1";
-		}
-		if($tipo==2){					///////////////////////Correo
-			$sql="select * from bit_datos where idfolio=:idfolio and up_correo=1";
-		}
-		if($tipo==3){					///////////////////////datos
-			$sql="select * from bit_datos where idfolio=:idfolio and up_datos=1";
-		}
-		if($tipo==4){					///////////////////////aportacion
-			$sql="select * from bit_datos where idfolio=:idfolio and up_aportacion=1";
-		}
-		if($tipo==5){					///////////////////////beneficiarios
-			$sql="select * from bit_datos where idfolio=:idfolio and up_bene=1";
-		}
-		if($tipo==6){					///////////////////////bancos
-			$sql="select * from bit_bancos where idfolio=:idfolio and up_date=1";
-		}
-		$sth = $this->dbh->prepare($sql);
-		$sth->bindValue(":idfolio",$idfolio);
-		$sth->execute();
-		return $this::general_($sth,3);
-	}
+	
 
 	public function guardar_datos(){			/////////////////////////////////////PARA CAMBIOS DE DATOS
 		$x="";

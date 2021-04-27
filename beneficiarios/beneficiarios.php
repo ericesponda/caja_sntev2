@@ -1,49 +1,52 @@
 <?php
-	 require_once("db_.php");
+	 require_once("index.php");
     $row=$db->afiliado();
     echo "<div class='container' id='trabajo'>";
-    $idfolio=$row['idfolio'];
-    $filiacion=$row['Filiacion'];
-    $ape_pat=$row['ape_pat'];
-    $ape_mat=$row['ape_mat'];
-    $nombre=$row['nombre'];
+    $idfolio=$row->idfolio;
+    $filiacion=$row->Filiacion;
+    $ape_pat=$row->ape_pat;
+    $ape_mat=$row->ape_mat;
+    $nombre=$row->nombre;
 
-    $ben1=$row['BA'];
-    $parentesco1=$row['PA'];
-    $porcentaje1=$row['BFA'];
+    $ben1=$row->BA;
+    $parentesco1=$row->PA;
+    $porcentaje1=$row->BFA;
 
-    $ben2=$row['BB'];
-    $parentesco2=$row['PB'];
-    $porcentaje2=$row['BFB'];
+    $ben2=$row->BB;
+    $parentesco2=$row->PB;
+    $porcentaje2=$row->BFB;
 
-    $ben3=$row['BC'];
-    $parentesco3=$row['PC'];
-    $porcentaje3=$row['BFC'];
+    $ben3=$row->BC;
+    $parentesco3=$row->PC;
+    $porcentaje3=$row->BFC;
 
-    $ben4=$row['BD'];
-    $parentesco4=$row['PD'];
-    $porcentaje4=$row['BFD'];
+    $ben4=$row->BD;
+    $parentesco4=$row->PD;
+    $porcentaje4=$row->BFD;
 
-    $ben5=$row['BE'];
-    $parentesco5=$row['PE'];
-    $porcentaje5=$row['BFE'];
+    $ben5=$row->BE;
+    $parentesco5=$row->PE;
+    $porcentaje5=$row->BFE;
 
     echo "<div class='container' id='div_trabajo'>";
 
       echo "<form id='form_benef' action='' data-lugar='beneficiarios/db_' data-funcion='guardar_beneficiarios' data-destino='beneficiarios/beneficiarios' data-div='div_trabajo'>";
       echo "<input class='form-control' type='hidden' id='id' NAME='id' value='$idfolio'  >";
-      echo "<div class='card'>";
+      echo "<div class='card mt-3'>";
     		echo "<div class='card-header'>";
           echo "<img src='img/caja.png' width='20' alt='logo'> - ";
     			echo "Beneficiarios";
     		echo "</div>";
+      echo "</div>";
 
+
+      echo "<div class='card mt-3'>";
         echo "<div class='card-body'>";
           echo "<div class='row'>";
             echo "<div class='col-xl-2 col-lg-2 col-md-2 col-sm-3'>";
               echo "<div class='form-group'>";
                 echo "<label for='idfolio'>Socio</label>";
-                echo "<input class='form-control' type='text' id='idfolio' NAME='idfolio' value='".$row['idfolio']."' placeholder='No. Empleado' readonly>";
+                echo "<input class='form-control' type='text' id='idfolio' NAME='idfolio' value='".$row->idfolio."' placeholder='No. Empleado' readonly>";
               echo "</div>";
             echo "</div>";
 
@@ -199,7 +202,7 @@
       echo "</div>";
 
       $row=$db->blo_lista();
-      $fbeneficiarios=fecha($row['fbeneficiarios']);
+      $fbeneficiarios=fecha($row->fbeneficiarios);
       $fecha_actual = strtotime(date("Y-m-d H:i:s",time()));
       $fecha_entrada = strtotime($fbeneficiarios);
 
@@ -366,3 +369,5 @@
     });
   }
 </script>
+
+

@@ -156,7 +156,6 @@ const sagyc = (ele) => {
     }
 
     if (xctrl.length > 4) {
-
         if (datos.xconfirm == "") {
             Swal.fire({
                 title: '¿Desea procesar los cambios realizados?',
@@ -197,7 +196,7 @@ const sagyc = (ele) => {
 //////////////////////////PROCESA EL FORM
 const sagyc_procesar = (datos, formData, formDestino) => {
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', datos.xctrl + ".php");
+    xhr.open('POST', datos.xctrl + "index.php");
     xhr.addEventListener('load', (data) => {
         if (!isJSON(data.target.response)) {
             console.log(data.target.response);
@@ -393,7 +392,7 @@ const proceso_fx = (formData, datos) => {
     }
     let variable = 0;
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', datos.xctrl + ".php");
+    xhr.open('POST', datos.xctrl + "index.php");
     xhr.addEventListener('load', (data) => {
         if (!isJSON(data.target.response)) {
             Swal.fire({

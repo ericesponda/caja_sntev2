@@ -277,6 +277,43 @@
 		public function leerfondo(){
 			return $_SESSION['idfondo'];
 		}
+
+		public function blog_alerta(){
+			$sql="select * from bit_blog where alerta=1";
+			return $this::general_($sql,2);
+		}
+		public function afiliado(){
+			$sql="select * from afiliados where idfolio=".$_SESSION['idfolio'];
+			return $this::general_($sql,1);
+		}
+		public function blo_lista(){
+			$sql="select * from bit_bloques limit 1";
+			return $this::general_($sql,1);	
+		}
+		public function cambios($tipo,$idfolio){
+			if($tipo=="pass"){					///////////////////////Contraseña
+				$sql="select * from bit_datos where idfolio=:idfolio and up_pass=1";
+			}
+			if($tipo==2){					///////////////////////Correo
+				$sql="select * from bit_datos where idfolio=:idfolio and up_correo=1";
+			}
+			if($tipo==3){					///////////////////////datos
+				$sql="select * from bit_datos where idfolio=:idfolio and up_datos=1";
+			}
+			if($tipo==4){					///////////////////////aportacion
+				$sql="select * from bit_datos where idfolio=:idfolio and up_aportacion=1";
+			}
+			if($tipo==5){					///////////////////////beneficiarios
+				$sql="select * from bit_datos where idfolio=:idfolio and up_bene=1";
+			}
+			if($tipo==6){					///////////////////////bancos
+				$sql="select * from bit_bancos where idfolio=:idfolio and up_date=1";
+			}
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(":idfolio",$idfolio);
+			$sth->execute();
+			return $this::general_($sth,3);
+		}
 	}
 
 	if(strlen($ctrl)>0){
