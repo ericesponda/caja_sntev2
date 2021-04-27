@@ -48,13 +48,17 @@
 	<div class="loader loader-double" id='cargando_div' style='background-color: rgba(0,0,0,.3);'>
 	</div>
 
-  <div class="sidebar">
+<div class="grid-container">
+  <header class="header">
+	<div class="text">Caja de Ahorro y Crédito</div>
+  </header>
+  <aside class="sidebar">
     <div class="logo_content">
-      <div class="logo">
-				<img src='img/caja.png' width='20' alt='logo'>
-        <div class="logo_name">Caja de Ahorro y Crédito</div>
-      </div>
-			<i class="fas fa-bars" id="btn"></i>
+		<div class="logo">
+			<img src='img/caja.png' width='20' alt='logo'>
+			<div class="logo_name">Caja de Ahorro y Crédito</div>
+		</div>
+		<i class="fas fa-bars" id="btn"></i>
     </div>
     <ul class="nav_list">
 			<!--
@@ -190,24 +194,31 @@
             <div class="job">Web Designer</div>
           </div>
         </div>
-
 				<a class='nav-link pull-left' onclick='salir()' id="log_out" >
 					<i class="fas fa-door-open"></i>
 				</a>
       </div>
     </div>
-  </div>
-  <div class="home_content">
-    <div class="text">Caja de Ahorro y Crédito</div>
-		<div class='fijaproceso main' id='contenido'>
+  
 
-		</div>
 
-  </div>
+  </aside>
+  <main class="main"  id='contenido'>
+
+
+  </main>
+  <footer class="footer">
+	   
+  </footer>
+</div>
+
+
+
+
 
 	<script>
 	 let btn = document.querySelector("#btn");
-	 let sidebar = document.querySelector(".sidebar");
+	 let sidebar = document.querySelector(".grid-container");
 	 let searchBtn = document.querySelector(".bx-search");
 
 	 btn.onclick = function() {

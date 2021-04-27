@@ -1,3 +1,4 @@
+
 /*******************************menu******************************/
 /* Google Font CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -8,53 +9,6 @@
   --sidebar-ft-color:#000;
   --fijaproceso-bg-color:#fff;
 }
-
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  grid-template-rows: 50px 1fr 50px;
-  grid-template-areas:
-    "sidenav header"
-    "sidenav main"
-    "sidenav footer";
-  height: 100vh;
-}
-
-.grid-container.active {
-   display: grid;
-  grid-template-columns: 240px 1fr;
-  grid-template-rows: 50px 1fr 50px;
-  grid-template-areas:
-    "sidenav header"
-    "sidenav main"
-    "sidenav footer";
-  height: 100vh;
-}
-
-/* Give every child element its grid name */
-.header {
-  grid-area: header;
-  background-color: #648ca6;
-}
-
-.sidebar {
-  grid-area: sidenav; 
-}
-
-.main {
-  grid-area: main;
-  background-color: var (--fijaproceso-bg-color);
-  overflow: auto;
-  padding: 10px;
-
-}
-
-.footer {
-  grid-area: footer;
-  background-color: #648ca6;
-}
-
 
 
 *{
@@ -73,16 +27,21 @@ body{
   color: #fff;
   background: #11101d;
 }
-
-.sidebar{  
+.sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 100%;
+  width: 78px;
   background: var(--sidebar-bg-color);
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
 }
-
-.grid-container .logo_content .logo{
+.sidebar.active{
+  width: 240px
+}
+.sidebar .logo_content .logo{
   color: var(--sidebar-ft-color);
   display: flex;
   height: 50px;
@@ -92,8 +51,7 @@ body{
   pointer-events: none;
   transition: all 0.5s ease;
 }
-
-.grid-container.active .logo_content .logo{
+.sidebar.active .logo_content .logo{
   opacity: 1;
   pointer-events: none;
 }
@@ -110,7 +68,7 @@ body{
   position: absolute;
   color: var(--sidebar-ft-color);
   top: 6px;
-  left: 40px;
+  left: 50%;
   font-size: 22px;
   height: 50px;
   width: 50px;
@@ -118,9 +76,8 @@ body{
   line-height: 50px;
   transform: translateX(-50%);
 }
-
-.grid-container.active #btn{
-  left: 210px;
+.sidebar.active #btn{
+  left: 90%;
 }
 .sidebar ul{
   margin-top: 20px;
@@ -152,7 +109,7 @@ body{
   pointer-events: none;
   display: block;
 }
-.grid-container.active ul li .tooltip{
+.sidebar.active ul li .tooltip{
   display: none;
 }
 .sidebar ul li:hover .tooltip{
@@ -186,7 +143,7 @@ body{
   color: #1d1b31;
 }
 .sidebar ul li a{
-  //color del sidebar
+  /*Color del sidebar*/
   color: var(--sidebar-ft-color);
   display: flex;
   align-items: center;
@@ -201,7 +158,7 @@ body{
 }
 .sidebar ul li i{
   font-size: 18px;
-  
+  /*font-weight: 400;*/
   height: 50px;
   min-width: 50px;
   border-radius: 12px;
@@ -215,7 +172,7 @@ body{
   pointer-events: none;
   transition: all 0.3s ease;
 }
-.grid-container.active .links_name{
+.sidebar.active .links_name{
   transition: 0s;
   opacity: 1;
   pointer-events: auto
@@ -225,7 +182,7 @@ body{
   color: #fff;
   bottom: 0;
   left: 0;
-  width: 239px;
+  width: 100%;
 }
 .sidebar .profile_content .profile{
   position: relative;
@@ -234,7 +191,7 @@ body{
   background: none;
   transition: all 0.4s ease;
 }
-.grid-container.active .profile_content .profile{
+.sidebar.active .profile_content .profile{
   background: #1d1b31;
 }
 .profile_content .profile .profile_details{
@@ -245,7 +202,7 @@ body{
   white-space: nowrap;
   transition: all 0.4s ease;
 }
-.grid-container.active ~ .profile .profile_details{
+.sidebar.active ~ .profile .profile_details{
   opacity: 1;
   pointer-events: auto;
 }
@@ -268,7 +225,7 @@ body{
 .profile #log_out{
   position: absolute;
   bottom: 5px;
-  left: 40px;
+  left: 50%;
   transform: translateX(-50%);
   min-width: 50px;
   line-height: 50px;
@@ -278,10 +235,10 @@ body{
   transition: all 0.4s ease;
   background: #1d1b31;
 }
-.grid-container.active .profile #log_out{
-  left: 120px;
+.sidebar.active .profile #log_out{
+  left: 88%;
 }
-.grid-container.active .profile #log_out{
+.sidebar.active .profile #log_out{
   background: none
 }
 .home_content{
@@ -293,7 +250,7 @@ body{
   box:shadow: 0 5px 10px rgba(0,0,0,0.2px);
   transition: all 0.5s ease;
 }
-.grid-container.active ~ .home_content{
+.sidebar.active ~ .home_content{
   z-index: 0;
 }
 .home_content .text{
@@ -302,13 +259,11 @@ body{
   color: #1d1b31;
   margin: 12px;
 }
-
-.grid-container.active ~ .home_content{
+.sidebar.active ~ .home_content{
   width: calc(100% - 240px);
   left: 240px;
 }
-
-
+/*------------------------    scroll bar-------------------------------------*/
 ::-webkit-scrollbar {
   width: 15px;
   height: 7px;

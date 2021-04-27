@@ -25,22 +25,24 @@
 	$celular=$row->celular;
 
 echo "<div class='container' id='div_trabajo'>";
-	echo "<form id='form_comision' action='' data-lugar='afiliado/db_' data-funcion='guardar_datos' data-destino='afiliado/datos' data-div='div_trabajo'>";
-	  echo "<input class='form-control form-control-sm' type='hidden' id='id' NAME='id' value='$idfolio' readonly>";
-  echo "<div class='card'>";
-		echo "<div class='card-header'>";
+	echo "<form id='formafiliado' xform='form' xctrl='afiliado/db_' xopt='guardar_datos' xdes='afiliado/datos' xdiv='div_trabajo'>";
+	echo "<input class='form-control form-control-sm' type='hidden' id='id' NAME='id' value='$idfolio' readonly>";
+ 	
+	echo "<div class='card mt-3'>";
+		echo "<div class='card-body'>";
 			echo "<img src='img/caja.png' width='20' alt='logo'> - ";
 			echo "Datos generales actuales";
 		echo "</div>";
+	echo "</div>";
 
-    echo "<div class='card-body'>";
-      echo "<div class='row'>";
-        echo "<div class='col-xl-2 col-lg-2 col-md-2 col-sm-3 '>";
-            echo "<label for='idfolio'>Socio</label>";
-            echo "<input class='form-control form-control-sm' type='text' id='idfolio' NAME='idfolio' value='".$row->idfolio."' placeholder='No. Empleado' readonly>";
-        echo "</div>";
-		
-
+	echo "<div class='card mt-3'>";
+		echo "<div class='card-body'>";
+		echo "<div class='row'>";
+			echo "<div class='col-xl-2 col-lg-2 col-md-2 col-sm-3 '>";
+				echo "<label for='idfolio'>Socio</label>";
+				echo "<input class='form-control form-control-sm' type='text' id='idfolio' NAME='idfolio' value='".$row->idfolio."' placeholder='No. Empleado' readonly>";
+			echo "</div>";
+	
         echo "<div class='col-xl-3 col-lg-4 col-md-4 col-sm-4'>";
           echo "<div class='form-group'>";
             echo "<label for='Filiacion'>Filiación</label>";
@@ -170,7 +172,6 @@ echo "<div class='container' id='div_trabajo'>";
 		$fusuario=fecha($row->fusuario);
 		$fecha_actual = strtotime(date("Y-m-d H:i:s",time()));
 		$fecha_entrada = strtotime($fusuario);
-
 		$cambio=$db->cambios(3,$idfolio);
 
 		echo "<div class='card-footer'>";
