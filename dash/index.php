@@ -75,7 +75,7 @@
 <div align="center">
 	<div class='row'>
 		<div class='col-12'>
-			<img src='img/snte.jpeg' max-width='300px'>
+			<img src='img/snte.jpeg' width='50%'>
 		</div>
 	</div>
 </div>
