@@ -80,14 +80,15 @@
 					$sql="select * from usuarios where NOMBRE='$us_fake' and CLAVE_ACC='$pa_fake'";
 					$sth = $this::general_($sql);
 					if($sth->rowCount()>0){
+						$CLAVE=$sth->fetch(PDO::FETCH_OBJ);
 
-						$userBD = trim($datos['NOMBRE']);
-						$passwordBD = trim($datos['CLAVE_ACC']);
-						if($userBD == $user and $passwordBD==$pass){
-							$_SESSION['autoriza']=1;
-							$_SESSION['filiacion']=$datos['RFC'];
-							$_SESSION['nombre']=$datos['NOMBRE'];
-							$_SESSION['idfolio']=$datos['CLV_PER'];
+						$userBD = trim($CLAVE->NOMBRE);
+						$passwordBD = trim($CLAVE->CLAVE_ACC);
+						if($userBD == $us_fake and $passwordBD==$pa_fake){
+							$_SESSION['autoriza_SNTE']=1;
+							$_SESSION['filiacion']=$CLAVE->RFC;
+							$_SESSION['nombre']=$CLAVE->NOMBRE;
+							$_SESSION['idfolio']=$CLAVE->CLV_PER;
 							$_SESSION['ape_pat']="";
 							$_SESSION['ape_mat']="";
 

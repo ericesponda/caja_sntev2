@@ -1,5 +1,6 @@
 <?php
 	require_once("db_.php");
+	
 	if(!isset($_SESSION['filiacion']) or strlen($_SESSION['filiacion'])==0 or $_SESSION['autoriza_SNTE']==0){
 		header("location: login/");
 	}
