@@ -33,6 +33,7 @@ echo "<div class='card mt-3'>";
 			echo "<img src='img/caja.png' width='20' alt='logo'> - ";
 			echo "Datos generales actuales";
 		echo "</div>";
+
 echo "</div>";
 
 	echo "<div class='card mt-3'>";
