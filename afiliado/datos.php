@@ -40,7 +40,7 @@ echo "</div>";
 		echo "<div class='card-body'>";
 			echo "<div class='row'>";
 			echo "<div class='col-12 col-xl col-auto '>";
-				echo "<label for='idfolio'>Sociox</label>";
+				echo "<label for='idfolio'>Socio xxxxxxx enanos pornos</label>";
 				echo "<input class='form-control' type='text' id='idfolio' NAME='idfolio' value='".$row->idfolio."' placeholder='No. Empleado' readonly>";
 			echo "</div>";
 
